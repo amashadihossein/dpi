@@ -20,7 +20,7 @@ For released version
 remotes::install_git(url = "https://github.com/amashadihossein/dpi.git")
 ```
 
-For released version
+For dev version
 
 ``` r
 remotes::install_git(url = "https://github.com/amashadihossein/dpi.git", ref = "dev")

@@ -25,12 +25,12 @@ The goal of dpi is to provide a programmatic interface to data object built with
 
 For released version
 
-```{r, eval=FALSE}
+```{r install, eval=FALSE}
 remotes::install_git(url = "https://github.com/amashadihossein/dpi.git")
 ```
 
-For released version
-```{r, eval=FALSE}
+For dev version
+```{r install_dev, eval=FALSE}
 remotes::install_git(url = "https://github.com/amashadihossein/dpi.git", ref = "dev")
 ```
 
