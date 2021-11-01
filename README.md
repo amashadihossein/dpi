@@ -9,21 +9,21 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of dpi is to provide a programmatic interface to data object
-built within Data-as-a-Product framework
+The goal of `dpi` is to provide a programmatic interface to data
+products built within Data-as-a-Product framework
 
 ## Installation
 
 For released version
 
 ``` r
-remotes::install_git(url = "https://github.com/amashadihossein/dpi.git")
+remotes::install_github("amashadihossein/dpi")
 ```
 
 For dev version
 
 ``` r
-remotes::install_git(url = "https://github.com/amashadihossein/dpi.git", ref = "dev")
+remotes::install_github("amashadihossein/dpi", ref = "dev")
 ```
 
 ## Example
