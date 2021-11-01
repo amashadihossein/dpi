@@ -20,7 +20,7 @@ Imports:
     dplyr,
     purrr,
     glue,
-    pins (== 0.4.4.9008),
+    pins (== 0.4.5.9001),
     magrittr,
     lubridate,
     Rlabkey,
