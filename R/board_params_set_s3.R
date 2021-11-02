@@ -11,10 +11,15 @@
 #'   bucket_name = "bucket_name", region = "us-east-1")
 #' }
 #' @export
-board_params_set_s3 <- function(board_alias, bucket_name, 
-                                region = c("us-east-1", "us-west-1")){
+board_params_set_s3 <- function(board_alias, bucket_name, region){
 
-  region <- match.arg(region, several.ok = F)
+  if(!isTRUE(region %in% aws_availability_zones)){
+   av_zones <-  paste0(aws_availability_zones, collapse = ", ")
+   warning(cli::format_warning(glue::glue("region {region} is not in recorded ",
+                                          "AWS availibility zones. Check the ",
+                                          "region! Recorded regions are:\n
+                                          {av_zones}")))
+  }
 
   board_params <- data.frame(board_type = "s3_board", board_alias = board_alias,
                              bucket_name = bucket_name, region = region, 

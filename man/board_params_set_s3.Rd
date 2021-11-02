@@ -4,11 +4,7 @@
 \alias{board_params_set_s3}
 \title{Generate Properly Formatted Board Parameters}
 \usage{
-board_params_set_s3(
-  board_alias,
-  bucket_name,
-  region = c("us-east-1", "us-west-1")
-)
+board_params_set_s3(board_alias, bucket_name, region)
 }
 \arguments{
 \item{board_alias}{name of the board}
