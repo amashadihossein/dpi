@@ -54,7 +54,8 @@ dp_connect.s3_board <- function(board_params, creds, ...){
                        versions = T,
                        key = key,
                        secret = secret,
-                       path = board_subdir)
+                       path = board_subdir,
+                       region = board_params$region)
 
 
   return(TRUE)
