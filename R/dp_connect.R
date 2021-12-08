@@ -1,10 +1,10 @@
 #' @title Connect to the Data Product Board
-#' @description Connect to the board housing the data product. This is needed 
+#' @description Connect to the board housing the data product. This is needed
 #' prior to interacting with the content of the board.
-#' @param creds use creds_set_aws() or creds_set_labkey() to set this. It 
+#' @param creds use creds_set_aws() or creds_set_labkey() to set this. It
 #' should contain credentials needed to access the remote where the dp is pinned.
-#' @param board_params use `board_params_set_s3` or `board_params_set_labkey` 
-#' for this. It contains the parameters for the board on which the data product 
+#' @param board_params use `board_params_set_s3` or `board_params_set_labkey`
+#' for this. It contains the parameters for the board on which the data product
 #' is pinned
 #' @param ... other parameters
 #' @return TRUE
@@ -28,17 +28,17 @@ dp_connect <- function(board_params, creds, ...){
 
 #'@export
 dp_connect.s3_board <- function(board_params, creds, ...){
-  
+
   args <- list(...)
   board_subdir <- "daap"
   if(length(args$board_subdir) >0)
     board_subdir <- args$board_subdir
-  
+
   aws_creds <- creds
 
 
   if(aws_creds$profile_name != ""){
-    key <- 
+    key <-
       aws.signature::locate_credentials(profile = aws_creds$profile_name)$key
     secret <-
       aws.signature::locate_credentials(profile = aws_creds$profile_name)$secret
@@ -48,13 +48,13 @@ dp_connect.s3_board <- function(board_params, creds, ...){
   }
 
   # Register the board
-  pins::board_register(board = "s3",
-                       name = board_params$board_alias,
+  pins::board_s3(#board = "s3",
+                       #name = board_params$board_alias,
                        bucket = board_params$bucket_name,
-                       versions = T,
-                       key = key,
-                       secret = secret,
-                       path = board_subdir,
+                       versioned = T,
+                       access_key = key,
+                       secret_access_key = secret,
+                       prefix = board_subdir,
                        region = board_params$region)
 
 
@@ -71,15 +71,15 @@ dp_connect.labkey_board <- function(board_params, creds, ...){
   board_subdir <- "daap"
   if(length(args$board_subdir) >0)
     board_subdir <- args$board_subdir
-  
+
   # Register the board
-  pins::board_register(board = "labkey",
-                       name = board_params$board_alias,
-                       api_key = creds$api_key,
-                       base_url = board_params$url,
-                       folder =  board_params$folder,
-                       versions = T,
-                       path = board_subdir)
+  pins::board_s3(board = "labkey",
+                       #name = board_params$board_alias,
+                       access_key = creds$api_key,
+                       #base_url = board_params$url,
+                       prefix =  board_params$folder,
+                       versioned = T)#,
+                       #path = board_subdir)
 
 
   return(TRUE)

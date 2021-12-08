@@ -3,9 +3,9 @@ Type: Package
 Title: Data Product Programming Interface
 Version: 0.0.0.9006
 Authors@R: c(
-    person("Afshin", "Mashadi-Hossein", email = "amashadihossein@gmail.com", 
+    person("Afshin", "Mashadi-Hossein", email = "balcomes@gmail.com", 
     role = c("aut", "cre")),
-    person("Yue", "Jiang", email = "rivehill@gmail.com", role = c("aut")))
+    person("Yue", "Jiang", email = "balcomes@gmail.com", role = c("aut")))
 Description: This package provides an interface to data product.
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
