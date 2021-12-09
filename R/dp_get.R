@@ -20,34 +20,50 @@
 #' @importFrom dplyr .data
 #' @export
 
-dp_get <- function(board_params, data_name, version = NULL){
-
+dp_get <- function(board_params, data_name, version = NULL) {
   dpconnect_check(board_params = board_params)
 
-  is_dpinput <- rev(unlist(strsplit(x = board_params$board_alias,
-                                    split = "_|-")))[1] == "dpinput"
+  is_dpinput <- rev(unlist(strsplit(
+    x = board_params$board_alias,
+    split = "_|-"
+  )))[1] == "dpinput"
 
-  if(is_dpinput)
-    #TODO
-    return(pins::pin_get(name = data_name, board = board_params$board_alias,
-                         version = version))
+  if (is_dpinput)
+    return(
+      pins::pin_read(
+        name = data_name,
+        board = board_params$board_alias,
+        version = version
+      )
+    )
 
   dp_ls <- dp_list(board_params = board_params)
-  available_datanames <- dp_ls %>% dplyr::filter(!.data$archived) %>%
+  available_datanames <-
+    dp_ls %>% dplyr::filter(!.data$archived) %>%
     dplyr::pull(.data$dp_name)
 
   if (!data_name %in% available_datanames)
-    stop(cli::format_error(glue::glue("data_name {data_name} is either archived",
-                                      " or not on this board. Check the ",
-                                      "data_name and board_alias")))
+    stop(cli::format_error(
+      glue::glue(
+        "data_name {data_name} is either archived",
+        " or not on this board. Check the ",
+        "data_name and board_alias"
+      )
+    ))
   if (length(version) > 0) {
     if (!version %in% (dp_ls$version))
-      stop(cli::format_error(glue::glue("version {version} is not on this ",
-                                        "board. Check the version and ",
-                                        "board_alias")))
+      stop(cli::format_error(
+        glue::glue(
+          "version {version} is not on this ",
+          "board. Check the version and ",
+          "board_alias"
+        )
+      ))
   }
-  #TODO
-  dp <- pins::pin_get(name = data_name, board = board_params$board_alias,
-                      version = version)
+
+  dp <-
+    pins::pin_read(name = data_name,
+                   board = board_params$board_alias,
+                   version = version)
   return(dp)
 }

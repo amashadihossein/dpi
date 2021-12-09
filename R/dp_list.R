@@ -20,18 +20,20 @@
 #' @importFrom lubridate as_datetime
 #' @importFrom lubridate with_tz
 #' @export
-dp_list <- function(board_params){
-
+dp_list <- function(board_params) {
   dpconnect_check(board_params = board_params)
 
-  #TODO
-  dpboard_log <- try(pins::pin_get(name = "dpboard-log",
-                                   board = board_params$board_alias,
-                                   files = F, cache = F))
-  if(!"data.frame" %in% class(dpboard_log))
-    stop(cli::format_error(glue::glue("Could not retrieve dpboard_log! Check",
-                                      "Check spelling, your connection and ",
-                                      "your credentials!")))
+  dpboard_log <- try(pins::pin_read(name = "dpboard-log",
+                                    board = board_params$board_alias))
+  #files = F, cache = F))
+  if (!"data.frame" %in% class(dpboard_log))
+    stop(cli::format_error(
+      glue::glue(
+        "Could not retrieve dpboard_log! Check",
+        "Check spelling, your connection and ",
+        "your credentials!"
+      )
+    ))
 
   dpls <- dpboard_log %>%
     dplyr::rename(version = .data$pin_version) %>%
@@ -40,7 +42,7 @@ dp_list <- function(board_params){
     dplyr::mutate(last_deployed = as_datetime(.data$last_deployed)) %>%
     dplyr::mutate(commit_time = with_tz(.data$commit_time)) %>%
     dplyr::mutate(last_deployed = with_tz(.data$last_deployed)) %>%
-    dplyr::relocate(.data$dp_name,.data$version, .data$board_alias)
+    dplyr::relocate(.data$dp_name, .data$version, .data$board_alias)
 
 
   return(dpls)
