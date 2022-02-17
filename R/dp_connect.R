@@ -18,7 +18,6 @@
 #' dp_connect(board_params, aws_creds)
 #' }
 #' @export
-
 dp_connect <- function(board_params, creds, ...){
   ellipsis::check_dots_used()
   UseMethod("dp_connect")
@@ -48,8 +47,10 @@ dp_connect.s3_board <- function(board_params, creds, ...){
   }
 
   # Register the board
-  pins::board_s3(#board = "s3",
-                       #name = board_params$board_alias,
+  #pins::board_s3(#board = "s3",
+  pins::board_register_s3(
+                       #TODO
+                       name = board_params$board_alias,
                        bucket = board_params$bucket_name,
                        versioned = T,
                        access_key = key,
@@ -63,7 +64,6 @@ dp_connect.s3_board <- function(board_params, creds, ...){
 }
 
 
-
 #'@export
 dp_connect.labkey_board <- function(board_params, creds, ...){
 
@@ -73,13 +73,36 @@ dp_connect.labkey_board <- function(board_params, creds, ...){
     board_subdir <- args$board_subdir
 
   # Register the board
-  pins::board_s3(board = "labkey",
-                       #name = board_params$board_alias,
+  pins::board_register_s3(board = "labkey",
+                       name = board_params$board_alias,
                        access_key = creds$api_key,
-                       #base_url = board_params$url,
+                       base_url = board_params$url,
                        prefix =  board_params$folder,
-                       versioned = T)#,
-                       #path = board_subdir)
+                       versioned = T,
+                       path = board_subdir)
+
+
+  return(TRUE)
+
+}
+
+
+#'@export
+dp_connect.local_board <- function(board_params, creds, ...){
+
+  args <- list(...)
+  board_subdir <- "daap"
+  if(length(args$board_subdir) >0)
+    board_subdir <- args$board_subdir
+
+  # Register the board
+  pins::board_register_local(board = "local",
+                          name = board_params$board_alias,
+                          access_key = creds$api_key,
+                          base_url = board_params$url,
+                          prefix =  board_params$folder,
+                          versioned = T,
+                          path = board_subdir)
 
 
   return(TRUE)
