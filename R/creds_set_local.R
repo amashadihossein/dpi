@@ -4,9 +4,9 @@
 #' @examples
 #' \dontrun{creds_set_local(api_key = Sys.getenv("LABKEY_API_KEY"))}
 #' @export
-creds_set_local <- function(api_key){
+creds_set_local <- function(cache){
 
-  local_creds <- data.frame(api_key = api_key)
+  local_creds <- data.frame(cache = cache)
 
   class(local_creds) <-  c("local_cred", class(local_creds))
 

@@ -44,6 +44,5 @@ dp_list <- function(board_params) {
     dplyr::mutate(last_deployed = with_tz(.data$last_deployed)) %>%
     dplyr::relocate(.data$dp_name, .data$version, .data$board_alias)
 
-
   return(dpls)
 }

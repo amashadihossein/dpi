@@ -24,7 +24,6 @@ dp_connect <- function(board_params, creds, ...){
 }
 
 
-
 #'@export
 dp_connect.s3_board <- function(board_params, creds, ...){
 
@@ -96,13 +95,7 @@ dp_connect.local_board <- function(board_params, creds, ...){
     board_subdir <- args$board_subdir
 
   # Register the board
-  pins::board_register_local(board = "local",
-                          name = board_params$board_alias,
-                          access_key = creds$api_key,
-                          base_url = board_params$url,
-                          prefix =  board_params$folder,
-                          versioned = T,
-                          path = board_subdir)
+  pins::board_register_local(name = board_params$board_alias, cache = board_params$cache)
 
 
   return(TRUE)

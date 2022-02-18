@@ -11,12 +11,12 @@
 #'   folder = "xxxx")
 #' }
 #' @export
-
-board_params_set_local <- function(board_alias, url, folder=""){
+board_params_set_local <- function(board_alias, cache){
 
   board_params <- data.frame(board_type = "local_board",
-                             board_alias = board_alias, folder = folder,
-                             url = url, stringsAsFactors = FALSE)
+                             board_alias = board_alias,
+                             cache = cache,
+                             stringsAsFactors = FALSE)
 
   class(board_params) <- c("local_board",class(board_params))
   return(board_params)
