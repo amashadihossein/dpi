@@ -4,7 +4,7 @@
 \alias{board_params_set_local}
 \title{Generate Properly Formatted Board Parameters}
 \usage{
-board_params_set_local(board_alias, url, folder = "")
+board_params_set_local(board_alias, cache)
 }
 \arguments{
 \item{board_alias}{name of the board}
@@ -25,4 +25,5 @@ parameters
 board_params_set_labkey(board_alias = "xxxx",
   folder = "xxxx")
 }
+
 }

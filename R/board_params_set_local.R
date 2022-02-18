@@ -10,6 +10,7 @@
 #' board_params_set_labkey(board_alias = "xxxx",
 #'   folder = "xxxx")
 #' }
+#'
 #' @export
 board_params_set_local <- function(board_alias, cache){
 

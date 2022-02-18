@@ -4,7 +4,7 @@
 \alias{creds_set_local}
 \title{Generate Local Credentials}
 \usage{
-creds_set_local(api_key)
+creds_set_local(cache)
 }
 \arguments{
 \item{api_key}{Local API key for the user}
