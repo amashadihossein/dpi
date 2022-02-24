@@ -23,7 +23,7 @@
 dp_list <- function(board_params) {
   dpconnect_check(board_params = board_params)
 
-  dpboard_log <- try(pins::pin_read(name = "dpboard-log",
+  dpboard_log <- try(pins::pin_get(name = "dpboard-log",
                                     board = board_params$board_alias))
   #files = F, cache = F))
   if (!"data.frame" %in% class(dpboard_log))
