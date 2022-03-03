@@ -8,10 +8,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' aws_creds <- creds_set_aws(key = Sys.getenv("AWS_KEY"),
-#' secret = Sys.getenv("AWS_SECRET"))
-#' board_params <- board_params_set_s3(board_alias = "board_alias",
-#'   bucket_name = "bucket_name", region = "us-east-1")
+#' aws_creds <- creds_set_aws(
+#'   key = Sys.getenv("AWS_KEY"),
+#'   secret = Sys.getenv("AWS_SECRET")
+#' )
+#' board_params <- board_params_set_s3(
+#'   board_alias = "board_alias",
+#'   bucket_name = "bucket_name", region = "us-east-1"
+#' )
 #' dp_connect(board_params, aws_creds)
 #' dp_list(board_params)
 #' }
@@ -23,10 +27,12 @@
 dp_list <- function(board_params) {
   dpconnect_check(board_params = board_params)
 
-  dpboard_log <- try(pins::pin_get(name = "dpboard-log",
-                                    board = board_params$board_alias))
-  #files = F, cache = F))
-  if (!"data.frame" %in% class(dpboard_log))
+  dpboard_log <- try(pins::pin_get(
+    name = "dpboard-log",
+    board = board_params$board_alias
+  ))
+  # files = F, cache = F))
+  if (!"data.frame" %in% class(dpboard_log)) {
     stop(cli::format_error(
       glue::glue(
         "Could not retrieve dpboard_log! Check",
@@ -34,6 +40,7 @@ dp_list <- function(board_params) {
         "your credentials!"
       )
     ))
+  }
 
   dpls <- dpboard_log %>%
     dplyr::rename(version = .data$pin_version) %>%

@@ -3,10 +3,9 @@ test_that("multiplication works", {
 })
 
 test_that("multiplication works", {
-
   board_alias <- "a"
   bucket_name <- "b"
-  region <-  "us-east-2"
+  region <- "us-east-2"
 
   board_params <- board_params_set_s3(board_alias, bucket_name, region)
 

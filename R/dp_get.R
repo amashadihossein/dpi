@@ -10,10 +10,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' aws_creds <- creds_set_aws(key = Sys.getenv("AWS_KEY"),
-#' secret = Sys.getenv("AWS_SECRET"))
-#' board_params <- board_params_set_s3(board_alias = "board_alias",
-#'   bucket_name = "bucket_name", region = "us-east-1")
+#' aws_creds <- creds_set_aws(
+#'   key = Sys.getenv("AWS_KEY"),
+#'   secret = Sys.getenv("AWS_SECRET")
+#' )
+#' board_params <- board_params_set_s3(
+#'   board_alias = "board_alias",
+#'   bucket_name = "bucket_name", region = "us-east-1"
+#' )
 #' dp_connect(board_params, aws_creds)
 #' dp <- dp_get("dp-study-branch", board_params = board_params)
 #' }
@@ -28,7 +32,7 @@ dp_get <- function(board_params, data_name, version = NULL) {
     split = "_|-"
   )))[1] == "dpinput"
 
-  if (is_dpinput)
+  if (is_dpinput) {
     return(
       pins::pin_get(
         name = data_name,
@@ -36,13 +40,15 @@ dp_get <- function(board_params, data_name, version = NULL) {
         version = version
       )
     )
+  }
 
   dp_ls <- dp_list(board_params = board_params)
   available_datanames <-
-    dp_ls %>% dplyr::filter(!.data$archived) %>%
+    dp_ls %>%
+    dplyr::filter(!.data$archived) %>%
     dplyr::pull(.data$dp_name)
 
-  if (!data_name %in% available_datanames)
+  if (!data_name %in% available_datanames) {
     stop(cli::format_error(
       glue::glue(
         "data_name {data_name} is either archived",
@@ -50,8 +56,9 @@ dp_get <- function(board_params, data_name, version = NULL) {
         "data_name and board_alias"
       )
     ))
+  }
   if (length(version) > 0) {
-    if (!version %in% (dp_ls$version))
+    if (!version %in% (dp_ls$version)) {
       stop(cli::format_error(
         glue::glue(
           "version {version} is not on this ",
@@ -59,11 +66,14 @@ dp_get <- function(board_params, data_name, version = NULL) {
           "board_alias"
         )
       ))
+    }
   }
 
   dp <-
-    pins::pin_get(name = data_name,
-                   board = board_params$board_alias,
-                   version = version)
+    pins::pin_get(
+      name = data_name,
+      board = board_params$board_alias,
+      version = version
+    )
   return(dp)
 }

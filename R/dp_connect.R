@@ -11,93 +11,97 @@
 #'
 #' @examples
 #' \dontrun{
-#' aws_creds <- creds_set_aws(key = Sys.getenv("AWS_KEY"),
-#' secret = Sys.getenv("AWS_SECRET"))
-#' board_params <- board_params_set_s3(board_alias = "board_alias",
-#'   bucket_name = "bucket_name", region = "us-east-1")
+#' aws_creds <- creds_set_aws(
+#'   key = Sys.getenv("AWS_KEY"),
+#'   secret = Sys.getenv("AWS_SECRET")
+#' )
+#' board_params <- board_params_set_s3(
+#'   board_alias = "board_alias",
+#'   bucket_name = "bucket_name", region = "us-east-1"
+#' )
 #' dp_connect(board_params, aws_creds)
 #' }
 #' @export
-dp_connect <- function(board_params, creds, ...){
+dp_connect <- function(board_params, creds, ...) {
   ellipsis::check_dots_used()
   UseMethod("dp_connect")
 }
 
 
-#'@export
-dp_connect.s3_board <- function(board_params, creds, ...){
-
+#' @export
+dp_connect.s3_board <- function(board_params, creds, ...) {
   args <- list(...)
   board_subdir <- "daap"
-  if(length(args$board_subdir) >0)
+  if (length(args$board_subdir) > 0) {
     board_subdir <- args$board_subdir
+  }
 
   aws_creds <- creds
 
 
-  if(aws_creds$profile_name != ""){
+  if (aws_creds$profile_name != "") {
     key <-
       aws.signature::locate_credentials(profile = aws_creds$profile_name)$key
     secret <-
       aws.signature::locate_credentials(profile = aws_creds$profile_name)$secret
-  }else{
+  } else {
     key <- aws_creds$key
     secret <- aws_creds$secret
   }
 
   # Register the board
-  #pins::board_s3(#board = "s3",
+  # pins::board_s3(#board = "s3",
   pins::board_register_s3(
-                       #TODO
-                       name = board_params$board_alias,
-                       bucket = board_params$bucket_name,
-                       versioned = T,
-                       access_key = key,
-                       secret_access_key = secret,
-                       prefix = board_subdir,
-                       region = board_params$region)
+    # TODO
+    name = board_params$board_alias,
+    bucket = board_params$bucket_name,
+    versioned = T,
+    access_key = key,
+    secret_access_key = secret,
+    prefix = board_subdir,
+    region = board_params$region
+  )
 
 
   return(TRUE)
-
 }
 
 
-#'@export
-dp_connect.labkey_board <- function(board_params, creds, ...){
-
+#' @export
+dp_connect.labkey_board <- function(board_params, creds, ...) {
   args <- list(...)
   board_subdir <- "daap"
-  if(length(args$board_subdir) >0)
+  if (length(args$board_subdir) > 0) {
     board_subdir <- args$board_subdir
+  }
 
   # Register the board
-  pins::board_register_s3(board = "labkey",
-                       name = board_params$board_alias,
-                       access_key = creds$api_key,
-                       base_url = board_params$url,
-                       prefix =  board_params$folder,
-                       versioned = T,
-                       path = board_subdir)
+  pins::board_register_s3(
+    board = "labkey",
+    name = board_params$board_alias,
+    access_key = creds$api_key,
+    base_url = board_params$url,
+    prefix = board_params$folder,
+    versioned = T,
+    path = board_subdir
+  )
 
 
   return(TRUE)
-
 }
 
 
-#'@export
-dp_connect.local_board <- function(board_params, creds, ...){
-
+#' @export
+dp_connect.local_board <- function(board_params, creds, ...) {
   args <- list(...)
   board_subdir <- "daap"
-  if(length(args$board_subdir) >0)
+  if (length(args$board_subdir) > 0) {
     board_subdir <- args$board_subdir
+  }
 
   # Register the board
   pins::board_register_local(name = board_params$board_alias, cache = board_params$cache)
 
 
   return(TRUE)
-
 }

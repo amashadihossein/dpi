@@ -7,18 +7,21 @@
 #' @return A data.frame board_params
 #' @examples
 #' \dontrun{
-#' board_params_set_labkey(board_alias = "xxxx",
-#'   folder = "xxxx")
+#' board_params_set_labkey(
+#'   board_alias = "xxxx",
+#'   folder = "xxxx"
+#' )
 #' }
 #' @export
-board_params_set_labkey <- function(board_alias, url, folder=""){
+board_params_set_labkey <- function(board_alias, url, folder = "") {
+  board_params <- data.frame(
+    board_type = "labkey_board",
+    board_alias = board_alias,
+    folder = folder,
+    url = url,
+    stringsAsFactors = FALSE
+  )
 
-  board_params <- data.frame(board_type = "labkey_board",
-                             board_alias = board_alias,
-                             folder = folder,
-                             url = url,
-                             stringsAsFactors = FALSE)
-
-  class(board_params) <- c("labkey_board",class(board_params))
+  class(board_params) <- c("labkey_board", class(board_params))
   return(board_params)
 }
