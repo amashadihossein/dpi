@@ -90,12 +90,13 @@ dp_connect.labkey_board <- function(board_params, creds, ...){
 dp_connect.local_board <- function(board_params, creds, ...){
 
   args <- list(...)
-  board_subdir <- "daap"
+  board_alias <- "daap"
   if(length(args$board_subdir) >0)
-    board_subdir <- args$board_subdir
+    board_alias <- args$board_subdir
 
   # Register the board
-  pins::board_register_local(name = board_params$board_alias, cache = board_params$cache)
+  pins::board_register_local(name = board_alias,
+                             cache = board_params$cache)
 
 
   return(TRUE)
