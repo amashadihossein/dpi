@@ -2,7 +2,7 @@
 % Please edit documentation in R/dp_connect.R
 \name{dp_connect}
 \alias{dp_connect}
-\title{Connect to the Data Product Board}
+\title{Connect to the data product board}
 \usage{
 dp_connect(board_params, creds, ...)
 }

@@ -1,4 +1,4 @@
-#' @title List Data Products on a Board
+#' @title List data products on the board
 #' @description  List all data products on a named board you are connected with. 
 #' It requires connection via dp_connet first.
 #' @param board_params use `board_params_set_s3` or `board_params_set_labkey` 

@@ -1,4 +1,4 @@
-#' @title Connect to the Data Product Board
+#' @title Connect to the data product board
 #' @description Connect to the board housing the data product. This is needed 
 #' prior to interacting with the content of the board.
 #' @param creds use creds_set_aws() or creds_set_labkey() to set this. It 
@@ -85,3 +85,25 @@ dp_connect.labkey_board <- function(board_params, creds, ...){
   return(TRUE)
 
 }
+
+
+#'@export
+dp_connect.local_board <- function(board_params, creds, ...){
+  
+  args <- list(...)
+  board_subdir <- "daap"
+  if(length(args$board_subdir) >0)
+    board_subdir <- args$board_subdir
+  
+  # Register the board
+  pins::board_register(board = "local",
+                       name = board_params$board_alias,
+                       cache =  file.path(board_params$folder, board_subdir),
+                       versions = T)
+  
+  
+  return(TRUE)
+  
+}
+
+

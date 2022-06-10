@@ -2,7 +2,7 @@
 % Please edit documentation in R/creds_set_aws.R
 \name{creds_set_aws}
 \alias{creds_set_aws}
-\title{Generate Properly Formatted AWS Credentials}
+\title{Generate properly formatted AWS credentials}
 \usage{
 creds_set_aws(
   profile_name = character(0),

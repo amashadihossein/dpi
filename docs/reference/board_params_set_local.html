@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Connect to the data product board — dp_connect • dpi</title>
+<title>Generate properly formatted board parameters for local board — board_params_set_local • dpi</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Connect to the data product board — dp_connect" />
-<meta property="og:description" content="Connect to the board housing the data product. This is needed
-prior to interacting with the content of the board." />
+<meta property="og:title" content="Generate properly formatted board parameters for local board — board_params_set_local" />
+<meta property="og:description" content="This function simply provides a consistent format for the board
+parameters" />
 
 
 
@@ -112,49 +112,39 @@ prior to interacting with the content of the board." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Connect to the data product board</h1>
-    <small class="dont-index">Source: <a href='https://github.com/amashadihossein/dpi/blob/master/R/dp_connect.R'><code>R/dp_connect.R</code></a></small>
-    <div class="hidden name"><code>dp_connect.Rd</code></div>
+    <h1>Generate properly formatted board parameters for local board</h1>
+    <small class="dont-index">Source: <a href='https://github.com/amashadihossein/dpi/blob/master/R/board_params_set_local.R'><code>R/board_params_set_local.R</code></a></small>
+    <div class="hidden name"><code>board_params_set_local.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Connect to the board housing the data product. This is needed
-prior to interacting with the content of the board.</p>
+    <p>This function simply provides a consistent format for the board
+parameters</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dp_connect</span><span class='op'>(</span><span class='va'>board_params</span>, <span class='va'>creds</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>board_params_set_local</span><span class='op'>(</span><span class='va'>board_alias</span>, <span class='va'>folder</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>board_params</th>
-      <td><p>use <code>board_params_set_s3</code> or <code>board_params_set_labkey</code>
-for this. It contains the parameters for the board on which the data product
-is pinned</p></td>
+      <th>board_alias</th>
+      <td><p>name of the board</p></td>
     </tr>
     <tr>
-      <th>creds</th>
-      <td><p>use creds_set_aws() or creds_set_labkey() to set this. It
-should contain credentials needed to access the remote where the dp is pinned.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>other parameters</p></td>
+      <th>folder</th>
+      <td><p>path of the folder where the data product will be stored</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>TRUE</p>
+    <p>A data.frame board_params</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>aws_creds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='creds_set_aws.html'>creds_set_aws</a></span><span class='op'>(</span>key <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"AWS_KEY"</span><span class='op'>)</span>,
-secret <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"AWS_SECRET"</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>board_params</span> <span class='op'>&lt;-</span> <span class='fu'><a href='board_params_set_s3.html'>board_params_set_s3</a></span><span class='op'>(</span>board_alias <span class='op'>=</span> <span class='st'>"board_alias"</span>,
-  bucket_name <span class='op'>=</span> <span class='st'>"bucket_name"</span>, region <span class='op'>=</span> <span class='st'>"us-east-1"</span><span class='op'>)</span>
-<span class='fu'>dp_connect</span><span class='op'>(</span><span class='va'>board_params</span>, <span class='va'>aws_creds</span><span class='op'>)</span>
+<span class='fu'>board_params_set_loca</span><span class='op'>(</span>board_alias <span class='op'>=</span> <span class='st'>"xxxx"</span>,
+  <span class='va'>cache</span>, folder <span class='op'>=</span> <span class='st'>"xxxx"</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>

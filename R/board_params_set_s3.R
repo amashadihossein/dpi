@@ -1,4 +1,4 @@
-#' @title Generate Properly Formatted Board Parameters
+#' @title Generate properly formatted board parameters for AWS s3 board
 #' @description This function simply provides a consistent format for the board 
 #' parameters
 #' @param board_alias name of the board

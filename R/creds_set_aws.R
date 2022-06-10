@@ -1,4 +1,4 @@
-#' @title Generate Properly Formatted AWS Credentials
+#' @title Generate properly formatted AWS credentials
 #' @description This function simply provides a consistent format for aws 
 #' credentials. Additionally, it ensures the minimum requirement of either 
 #' named profile or a set of AWS (key, secret) are provided. Note if named 

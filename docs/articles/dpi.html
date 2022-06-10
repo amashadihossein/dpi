@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dpi</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9007</span>
       </span>
     </div>
 
@@ -67,7 +67,7 @@
 
       
 
-      </header><script src="dpi_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
+      </header><script src="dpi_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>dpi</h1>
@@ -85,9 +85,26 @@
 <div id="background" class="section level1">
 <h1 class="hasAnchor">
 <a href="#background" class="anchor"></a>Background</h1>
-<p>This package aims to provide a minimalist and uniform interface for retrieving data products and the associated metadata no matter where the data product is housed. Currently, s3 and labkey are two types of remote repositories for housing data products.</p>
-<p>This packages leverages the <code>pins</code> package for accessing data. As such, it leverage the concept of <code>boards</code> for organizing data into <strong>data spaces</strong>. As an example, a team working on multiple clinical studies, may consider defining a data space or <code>board</code> for each study, each of which defined by a governance policy. In this example, a <code>board</code> is not dissimilar to the idea of a directory or folder. A board can be instantiated on different data platforms (e.g. AWS s3) supported by <code>pins</code> or its extensions.</p>
-<p>As different data platforms (e.g. s3 vs. labkey) have their own specific url and ways of authentication, different parameters need to be set up for how connection to the remote data repository is to be established. Once the connection is established, however, all other interactions (e.g. list, get, version, etc.) are done using the same set of functions. With that in mind, the steps outlined below are divided into</p>
+<p>This package aims to provide a minimalist and uniform interface for
+retrieving data products and the associated metadata no matter where the
+data product is housed. Currently, s3 and labkey are two types of remote
+repositories for housing data products.</p>
+<p>This packages leverages the <code>pins</code> package for accessing
+data. As such, it leverage the concept of <code>boards</code> for
+organizing data into <strong>data spaces</strong>. As an example, a team
+working on multiple clinical studies, may consider defining a data space
+or <code>board</code> for each study, each of which defined by a
+governance policy. In this example, a <code>board</code> is not
+dissimilar to the idea of a directory or folder. A board can be
+instantiated on different data platforms (e.g. AWS s3) supported by
+<code>pins</code> or its extensions.</p>
+<p>As different data platforms (e.g. s3 vs. labkey) have their own
+specific url and ways of authentication, different parameters need to be
+set up for how connection to the remote data repository is to be
+established. Once the connection is established, however, all other
+interactions (e.g. list, get, version, etc.) are done using the same set
+of functions. With that in mind, the steps outlined below are divided
+into</p>
 <ol style="list-style-type: decimal">
 <li>Setting up the connection</li>
 <li>Interacting with the data product</li>
@@ -98,28 +115,35 @@
 <a href="#set-up-connection" class="anchor"></a>Set up connection</h1>
 <p>Setting up connection to data products involves setting</p>
 <ol style="list-style-type: decimal">
-<li>Board parameters: parameters relating to the remote location of the data product</li>
-<li>Credential parameters: parameters checked by the remote location of the data when trying to access</li>
+<li>Board parameters: parameters relating to the remote location of the
+data product</li>
+<li>Credential parameters: parameters checked by the remote location of
+the data when trying to access</li>
 </ol>
-<p><strong>NOTE:</strong> prior to proceeding further verify that you have working credentials for the repository you need to access.</p>
+<p><strong>NOTE:</strong> prior to proceeding further verify that you
+have working credentials for the repository you need to access.</p>
 <div id="board-parameters" class="section level2">
 <h2 class="hasAnchor">
 <a href="#board-parameters" class="anchor"></a>Board parameters</h2>
-<p>Currently data products housed on either Labkey or AWS s3 are supported.</p>
+<p>Currently data products housed on either Labkey or AWS s3 are
+supported.</p>
 <ul>
 <li>For s3, you need to know the bucket name and the region.</li>
-<li>For Labkey, you need to know the url of platform and specific folder.</li>
+<li>For Labkey, you need to know the url of platform and specific
+folder.</li>
 </ul>
 </div>
 <div id="format-board-parameters" class="section level2">
 <h2 class="hasAnchor">
 <a href="#format-board-parameters" class="anchor"></a>Format board parameters</h2>
-<p>For S3, you need to provide an alias that signifies the data space this data product could belong to.</p>
+<p>For S3, you need to provide an alias that signifies the data space
+this data product could belong to.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">board_params_s3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/board_params_set_s3.html">board_params_set_s3</a></span><span class="op">(</span>board_alias <span class="op">=</span> <span class="st">"an_alias_for_data_board"</span>,
                                  bucket_name <span class="op">=</span> <span class="st">"bucket_name"</span>,
                                  region <span class="op">=</span> <span class="st">"us-east-1"</span><span class="op">)</span></code></pre></div>
-<p>The Labkey parameters for a data product will have pattern as given below</p>
+<p>The Labkey parameters for a data product will have pattern as given
+below</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">board_params_labkey</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/board_params_set_labkey.html">board_params_set_labkey</a></span><span class="op">(</span>board_alias <span class="op">=</span> <span class="st">"labkey"</span>,
                                                url <span class="op">=</span> <span class="st">'https:url_to_labkey/labkey'</span>,
@@ -128,13 +152,24 @@
 <div id="format-your-credentials" class="section level2">
 <h2 class="hasAnchor">
 <a href="#format-your-credentials" class="anchor"></a>Format your credentials</h2>
-<p>This can be done with <code>cred_set_aws</code> or <code>cred_set_labkey</code> functions. The cred_set function signatures informs you of the type of parameters needed.</p>
-<p><strong>NOTE:</strong> For security reasons, avoid putting your credentials inside your script. It is highly recommended to establish a habit of using environment variables in conjunction with secret management packages like <code>keyring</code>. Below, exemplifies this pattern, where the env variables are set using <code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv("AWS_KEY" = "xxxx")</a></code> in console, or using <code>keyring</code>, <code>Sys.setenv("AWS_KEY" = keyring::key_get(service = "AWS_KEY")</code>. Similarly, “AWS_SCRET” can be set as an environment variable.</p>
+<p>This can be done with <code>cred_set_aws</code> or
+<code>cred_set_labkey</code> functions. The cred_set function signatures
+informs you of the type of parameters needed.</p>
+<p><strong>NOTE:</strong> For security reasons, avoid putting your
+credentials inside your script. It is highly recommended to establish a
+habit of using environment variables in conjunction with secret
+management packages like <code>keyring</code>. Below, exemplifies this
+pattern, where the env variables are set using
+<code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv("AWS_KEY" = "xxxx")</a></code> in console, or using
+<code>keyring</code>,
+<code>Sys.setenv("AWS_KEY" = keyring::key_get(service = "AWS_KEY")</code>.
+Similarly, “AWS_SCRET” can be set as an environment variable.</p>
 <p>The signature for creds for AWS s3 is takes two parameters.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">aws_creds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/creds_set_aws.html">creds_set_aws</a></span><span class="op">(</span>key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"AWS_KEY"</span><span class="op">)</span>,
                            secret <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"AWS_SECRET"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>If the data board was to be set up on Labkey, the signature for creds only takes one parameter <code>api_key</code></p>
+<p>If the data board was to be set up on Labkey, the signature for creds
+only takes one parameter <code>api_key</code></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">labkey_creds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/creds_set_labkey.html">creds_set_labkey</a></span><span class="op">(</span>api_key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"LABKEY_API_KEY"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
@@ -142,7 +177,9 @@
 <div id="connect-and-interact-with-data-product" class="section level1">
 <h1 class="hasAnchor">
 <a href="#connect-and-interact-with-data-product" class="anchor"></a>Connect and interact with data product</h1>
-<p>With the connection parameters established, interaction with the data product use the same set of function and format no matter where the data is housed.</p>
+<p>With the connection parameters established, interaction with the data
+product use the same set of function and format no matter where the data
+is housed.</p>
 <div id="connect-to-the-board" class="section level2">
 <h2 class="hasAnchor">
 <a href="#connect-to-the-board" class="anchor"></a>Connect to the board</h2>
@@ -153,14 +190,16 @@
 <div id="work-with-the-board" class="section level2">
 <h2 class="hasAnchor">
 <a href="#work-with-the-board" class="anchor"></a>Work with the board</h2>
-<p>List what data products available on this board we just connected to. Note we need to connect first in order to list.</p>
+<p>List what data products available on this board we just connected to.
+Note we need to connect first in order to list.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/dp_list.html">dp_list</a></span><span class="op">(</span>board_params <span class="op">=</span> <span class="va">board_params_s3</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="retrieve-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#retrieve-data" class="anchor"></a>Retrieve data</h2>
-<p>Load data into the working environment, e.g. as object <code>dp</code>.</p>
+<p>Load data into the working environment, e.g. as object
+<code>dp</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dp_get.html">dp_get</a></span><span class="op">(</span>data_name <span class="op">=</span> <span class="st">"dp-studyid_branchid"</span>, 
             board_params <span class="op">=</span> <span class="va">board_params_s3</span>, 

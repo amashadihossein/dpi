@@ -1,4 +1,4 @@
-#' @title Generate Labkey Credentials
+#' @title Generate properly formatted Labkey credentials
 #' @param api_key Labkey API key for the user
 #' @return labkey_creds
 #' @examples
