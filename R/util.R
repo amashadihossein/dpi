@@ -8,4 +8,5 @@ dpconnect_check <- function(board_params){
     stop(cli::format_error(glue::glue("You are not currently connected to ",
                                       "{board_params$board_alias}. Use ",
                                       "dp_connect to connect first!")))
+  invisible(board_info)
 }
