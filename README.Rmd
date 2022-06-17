@@ -62,3 +62,9 @@ dp_get(data_name = "dp-studyid_branchid",
             board_params = board_params_s3, 
             version = "specific_version") # e.g. "c5a51c3"
 ```
+
+## Related documentation
+
+- `daapr`: https://amashadihossein.github.io/daapr/
+- `dpbuild`: https://amashadihossein.github.io/dpbuild/
+- `dpdeploy`: https://amashadihossein.github.io/dpdeploy/
