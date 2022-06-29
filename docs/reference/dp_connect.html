@@ -135,8 +135,9 @@ is pinned</p></td>
     </tr>
     <tr>
       <th>creds</th>
-      <td><p>use creds_set_aws() or creds_set_labkey() to set this. It
-should contain credentials needed to access the remote where the dp is pinned.</p></td>
+      <td><p>When <code>local_board</code>, creds is ignored and need to be specified.
+Otherwise, use creds_set_aws() or creds_set_labkey() to set this. It should
+contain credentials needed to access the remote where the dp is pinned.</p></td>
     </tr>
     <tr>
       <th>...</th>
