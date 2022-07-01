@@ -89,7 +89,7 @@ dp_connect.labkey_board <- function(board_params, creds, ...){
 
 
 #'@export
-dp_connect.local_board <- function(board_params, creds = character(0), ...){
+dp_connect.local_board <- function(board_params, creds = NULL, ...){
   
   args <- list(...)
   board_subdir <- "daap"
