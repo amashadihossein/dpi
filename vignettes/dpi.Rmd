@@ -71,8 +71,8 @@ product could belong to.
 
 ```{r, eval=FALSE}
 board_params_s3 <- board_params_set_s3(board_alias = "an_alias_for_data_board",
-                                 bucket_name = "bucket_name",
-                                 region = "us-east-1")
+                                       bucket_name = "bucket_name",
+                                       region = "us-east-1")
 ```
 
 The Labkey parameters for a data product will have pattern as given below
@@ -111,7 +111,6 @@ If the data board was to be set up on Labkey, the signature for creds only
 takes one parameter `api_key`
 ```{r, eval=FALSE}
 labkey_creds <- creds_set_labkey(api_key = Sys.getenv("LABKEY_API_KEY"))
-
 ```
 
 
@@ -142,7 +141,7 @@ dp_list(board_params = board_params_s3)
 Load data into the working environment, e.g. as object `dp`.
 
 ```{r, eval=FALSE}
-dp <- dp_get(data_name = "dp-studyid_branchid", 
-            board_params = board_params_s3, 
-            version = "c5a51c3")
+dp <- dp_get(data_name = "dp-studyid_branchid",
+             board_params = board_params_s3,
+             version = "c5a51c3")
 ```
