@@ -70,17 +70,21 @@ For S3, you need to provide an alias that signifies the data space this data
 product could belong to. 
 
 ```{r, eval=FALSE}
-board_params_s3 <- board_params_set_s3(board_alias = "an_alias_for_data_board",
-                                       bucket_name = "bucket_name",
-                                       region = "us-east-1")
+board_params_s3 <- board_params_set_s3(
+  board_alias = "an_alias_for_data_board",
+  bucket_name = "bucket_name",
+  region = "us-east-1"
+)
 ```
 
 The Labkey parameters for a data product will have pattern as given below
 
 ```{r, eval=FALSE}
-board_params_labkey <- board_params_set_labkey(board_alias = "labkey",
-                                               url = 'https:url_to_labkey/labkey',
-                                               folder = '/project_folder/subfolder')
+board_params_labkey <- board_params_set_labkey(
+  board_alias = "labkey",
+  url = "https:url_to_labkey/labkey",
+  folder = "/project_folder/subfolder"
+)
 ```
 
 
@@ -102,8 +106,10 @@ exemplifies this pattern, where the env variables are set using
 The signature for creds for AWS s3 is takes two parameters.
 
 ```{r, eval=FALSE}
-aws_creds <- creds_set_aws(key = Sys.getenv("AWS_KEY"),
-                           secret = Sys.getenv("AWS_SECRET"))
+aws_creds <- creds_set_aws(
+  key = Sys.getenv("AWS_KEY"),
+  secret = Sys.getenv("AWS_SECRET")
+)
 ```
 
 
@@ -141,7 +147,9 @@ dp_list(board_params = board_params_s3)
 Load data into the working environment, e.g. as object `dp`.
 
 ```{r, eval=FALSE}
-dp <- dp_get(data_name = "dp-studyid_branchid",
-             board_params = board_params_s3,
-             version = "c5a51c3")
+dp <- dp_get(
+  data_name = "dp-studyid_branchid",
+  board_params = board_params_s3,
+  version = "c5a51c3"
+)
 ```
