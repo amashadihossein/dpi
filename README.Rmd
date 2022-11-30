@@ -37,7 +37,6 @@ remotes::install_github("amashadihossein/dpi", ref = "dev")
 
 ## Example
 
-
 ```{r example, eval = F}
 library(dpi)
 
@@ -68,3 +67,9 @@ dp_get(
   version = "specific_version"
 ) # e.g. "c5a51c3"
 ```
+
+## Related documentation
+
+- `daapr`: https://amashadihossein.github.io/daapr/
+- `dpbuild`: https://amashadihossein.github.io/dpbuild/
+- `dpdeploy`: https://amashadihossein.github.io/dpdeploy/
