@@ -31,7 +31,7 @@ creds_set_aws <- function(profile_name = character(0), key = character(0),
 
   if (length(profile_name) > 0) {
     aws_profiles <- try(aws.signature::read_credentials())
-    if (class(aws_profiles) == "try-error") {
+    if (inherits(aws_profiles, "try-error")) {
       stop(cli::format_error(glue::glue(
         "Failed to successfully retrieve AWS ",
         "named profiles. Either use key and ",

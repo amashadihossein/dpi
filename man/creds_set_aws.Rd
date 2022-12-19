@@ -32,7 +32,9 @@ profile is provided key and secret will be ignored.
 }
 \examples{
 \dontrun{
-aws_creds <- creds_set_aws(key = Sys.getenv("AWS_KEY"),
-secret = Sys.getenv("AWS_SECRET"))
+aws_creds <- creds_set_aws(
+  key = Sys.getenv("AWS_KEY"),
+  secret = Sys.getenv("AWS_SECRET")
+)
 }
 }
