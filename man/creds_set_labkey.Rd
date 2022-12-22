@@ -16,5 +16,7 @@ labkey_creds
 Generate Labkey Credentials
 }
 \examples{
-\dontrun{creds_set_labkey (api_key = Sys.getenv("LABKEY_API_KEY"))}
+\dontrun{
+creds_set_labkey(api_key = Sys.getenv("LABKEY_API_KEY"))
+}
 }
