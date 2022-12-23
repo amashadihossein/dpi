@@ -1,4 +1,4 @@
-#' @title  Get the data object
+#' @title  Get the Data Object
 #' @description Load into working environment the data data object
 #' @param board_params use `board_params_set_s3` or `board_params_set_labkey`
 #' for this. It contains the parameters for the board on which the data product
