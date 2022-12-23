@@ -22,7 +22,9 @@ parameters
 }
 \examples{
 \dontrun{
-board_params_set_labkey(board_alias = "xxxx",
-  folder = "xxxx")
+board_params_set_labkey(
+  board_alias = "xxxx",
+  folder = "xxxx"
+)
 }
 }

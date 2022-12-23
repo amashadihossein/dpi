@@ -11,22 +11,17 @@ License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 Depends:
     R (>= 3.6.0)
 Imports: 
-    aws.s3,
     aws.signature,
     dplyr,
-    purrr,
     glue,
     pins (== 0.4.5.9001),
     magrittr,
     lubridate,
-    Rlabkey,
     ellipsis,
-    stringi,
-    tibble,
     cli
 Suggests:
     knitr,

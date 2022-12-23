@@ -20,10 +20,14 @@ It requires connection via dp_connet first.
 }
 \examples{
 \dontrun{
-aws_creds <- creds_set_aws(key = Sys.getenv("AWS_KEY"),
-secret = Sys.getenv("AWS_SECRET"))
-board_params <- board_params_set_s3(board_alias = "board_alias",
-  bucket_name = "bucket_name", region = "us-east-1")
+aws_creds <- creds_set_aws(
+  key = Sys.getenv("AWS_KEY"),
+  secret = Sys.getenv("AWS_SECRET")
+)
+board_params <- board_params_set_s3(
+  board_alias = "board_alias",
+  bucket_name = "bucket_name", region = "us-east-1"
+)
 dp_connect(board_params, aws_creds)
 dp_list(board_params)
 }
