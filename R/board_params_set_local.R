@@ -2,12 +2,15 @@
 #' @description This function simply provides a consistent format for the board 
 #' parameters
 #' @param board_alias name of the board
-#' @param folder path of the folder where the data product will be stored
+#' @param folder path to data product storage folder. NOTE: as a general 
+#' guidance this folder should be treated as a permanent with immutable content.
+#' For example, a data product project folder *is not* an appropriate directory. 
+#' 
 #' @return A data.frame board_params
 #' @examples
 #' \dontrun{
 #' board_params_set_loca(board_alias = "xxxx",
-#'   cache, folder = "xxxx")
+#'   folder = "xxxx")
 #' }
 #' @export
 
