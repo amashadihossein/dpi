@@ -1,7 +1,7 @@
 Package: dpi
 Type: Package
 Title: Data Product Programming Interface
-Version: 0.0.0.9006
+Version: 0.0.0.9007
 Authors@R: c(
     person("Afshin", "Mashadi-Hossein", email = "amashadihossein@gmail.com", 
     role = c("aut", "cre")),

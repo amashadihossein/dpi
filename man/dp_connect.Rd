@@ -11,8 +11,8 @@ dp_connect(board_params, creds, ...)
 for this. It contains the parameters for the board on which the data product
 is pinned}
 
-\item{creds}{use creds_set_aws() or creds_set_labkey() to set this. It
-should contain credentials needed to access the remote where the dp is pinned.}
+\item{creds}{When \code{local_board}, creds is ignored and need to be specified.
+Otherwise, use creds_set_aws() or creds_set_labkey() to set this. It should}
 
 \item{...}{other parameters}
 }

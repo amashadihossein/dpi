@@ -11,4 +11,5 @@ dpconnect_check <- function(board_params) {
       "dp_connect to connect first!"
     )))
   }
+  invisible(board_info)
 }
