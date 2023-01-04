@@ -2,7 +2,7 @@
 % Please edit documentation in R/board_params_set_labkey.R
 \name{board_params_set_labkey}
 \alias{board_params_set_labkey}
-\title{Generate properly formatted board parameters for Labkey board}
+\title{Generate Properly Formatted Board Parameters}
 \usage{
 board_params_set_labkey(board_alias, url, folder = "")
 }

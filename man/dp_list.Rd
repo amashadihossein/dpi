@@ -2,7 +2,7 @@
 % Please edit documentation in R/dp_list.R
 \name{dp_list}
 \alias{dp_list}
-\title{List data products on the board}
+\title{List Data Products on a Board}
 \usage{
 dp_list(board_params)
 }

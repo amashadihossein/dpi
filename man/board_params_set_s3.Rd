@@ -2,7 +2,7 @@
 % Please edit documentation in R/board_params_set_s3.R
 \name{board_params_set_s3}
 \alias{board_params_set_s3}
-\title{Generate properly formatted board parameters for AWS s3 board}
+\title{Generate Properly Formatted Board Parameters}
 \usage{
 board_params_set_s3(board_alias, bucket_name, region)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/dp_get.R
 \name{dp_get}
 \alias{dp_get}
-\title{Get the data object}
+\title{Get the Data Object}
 \usage{
 dp_get(board_params, data_name, version = NULL)
 }

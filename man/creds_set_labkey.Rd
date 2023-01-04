@@ -2,7 +2,7 @@
 % Please edit documentation in R/creds_set_labkey.R
 \name{creds_set_labkey}
 \alias{creds_set_labkey}
-\title{Generate properly formatted Labkey credentials}
+\title{Generate Labkey Credentials}
 \usage{
 creds_set_labkey(api_key)
 }
@@ -13,7 +13,7 @@ creds_set_labkey(api_key)
 labkey_creds
 }
 \description{
-Generate properly formatted Labkey credentials
+Generate Labkey Credentials
 }
 \examples{
 \dontrun{

@@ -9,7 +9,10 @@ board_params_set_local(board_alias, folder)
 \arguments{
 \item{board_alias}{name of the board}
 
-\item{folder}{path of the folder where the data product will be stored}
+\item{folder}{path to data product storage folder. NOTE: as a general
+guidance this folder should be treated as a permanent location with immutable
+content. For example, a data product project folder \emph{is not} an appropriate
+directory.}
 }
 \value{
 A data.frame board_params
@@ -21,6 +24,6 @@ parameters
 \examples{
 \dontrun{
 board_params_set_loca(board_alias = "xxxx",
-  cache, folder = "xxxx")
+  folder = "xxxx")
 }
 }

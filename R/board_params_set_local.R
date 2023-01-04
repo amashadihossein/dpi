@@ -3,8 +3,9 @@
 #' parameters
 #' @param board_alias name of the board
 #' @param folder path to data product storage folder. NOTE: as a general 
-#' guidance this folder should be treated as a permanent with immutable content.
-#' For example, a data product project folder *is not* an appropriate directory. 
+#' guidance this folder should be treated as a permanent location with immutable
+#' content. For example, a data product project folder *is not* an appropriate 
+#' directory. 
 #' 
 #' @return A data.frame board_params
 #' @examples
