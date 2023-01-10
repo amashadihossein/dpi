@@ -23,7 +23,7 @@ parameters
 }
 \examples{
 \dontrun{
-board_params_set_loca(board_alias = "xxxx",
+board_params_set_local(board_alias = "xxxx",
   folder = "xxxx")
 }
 }
