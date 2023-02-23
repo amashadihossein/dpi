@@ -24,7 +24,8 @@
 #' @importFrom dplyr .data
 #' @export
 dp_get <- function(board_params, data_name, version = NULL) {
-  dpconnect_check(board_params = board_params)
+  board_info <- dpconnect_check(board_params = board_params)
+  use_cache <- board_info$board == "local"
 
   is_dpinput <- rev(unlist(strsplit(
     x = board_params$board_alias,
@@ -34,7 +35,8 @@ dp_get <- function(board_params, data_name, version = NULL) {
   if (is_dpinput) {
     return(pins::pin_get(
       name = data_name, board = board_params$board_alias,
-      version = version
+      version = version,
+      cache = use_cache
     ))
   }
 
@@ -61,7 +63,8 @@ dp_get <- function(board_params, data_name, version = NULL) {
   }
   dp <- pins::pin_get(
     name = data_name, board = board_params$board_alias,
-    version = version
+    version = version,
+    cache = use_cache
   )
   return(dp)
 }
