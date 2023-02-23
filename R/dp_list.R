@@ -25,12 +25,13 @@
 #' @importFrom lubridate with_tz
 #' @export
 dp_list <- function(board_params) {
-  dpconnect_check(board_params = board_params)
+  board_info <- dpconnect_check(board_params = board_params)
+  use_cache <- board_info$board == "local"
 
   dpboard_log <- try(pins::pin_get(
     name = "dpboard-log",
     board = board_params$board_alias,
-    files = F, cache = F
+    files = F, cache = use_cache
   ))
   if (!"data.frame" %in% class(dpboard_log)) {
     stop(cli::format_error(glue::glue(
