@@ -26,6 +26,7 @@ Imports:
 Suggests:
     knitr,
     rmarkdown,
-    testthat
+    testthat (>= 3.0.0)
 BugReports: https://github.com/amashadihossein/dpi/issues
 VignetteBuilder: knitr
+Config/testthat/edition: 3
