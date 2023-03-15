@@ -14,7 +14,7 @@ board_params_set_s3(board_alias, bucket_name, region)
 \item{region}{AWS region for the s3 bucket e.g. "us-east-1" or "us-west-1"}
 }
 \value{
-A data.frame board_params
+A data.frame with properly formatted board_params
 }
 \description{
 This function simply provides a consistent format for the board
@@ -24,7 +24,8 @@ parameters
 \dontrun{
 board_params_set_s3(
   board_alias = "board_alias",
-  bucket_name = "bucket_name", region = "us-east-1"
+  bucket_name = "bucket_name",
+  region = "us-east-1"
 )
 }
 }

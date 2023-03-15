@@ -15,7 +15,7 @@ content. For example, a data product project folder \emph{is not} an appropriate
 directory.}
 }
 \value{
-A data.frame board_params
+A data.frame with properly formatted board_params
 }
 \description{
 This function simply provides a consistent format for the board
@@ -23,7 +23,8 @@ parameters
 }
 \examples{
 \dontrun{
-board_params_set_local(board_alias = "xxxx",
+board_params_set_local(
+  board_alias = "xxxx",
   folder = "xxxx")
 }
 }

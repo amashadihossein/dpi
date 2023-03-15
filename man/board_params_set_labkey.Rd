@@ -9,12 +9,12 @@ board_params_set_labkey(board_alias, url, folder = "")
 \arguments{
 \item{board_alias}{name of the board}
 
-\item{url}{url of the labkey server}
+\item{url}{url of the LabKey server}
 
 \item{folder}{path of the study folder where the data product will be stored}
 }
 \value{
-A data.frame board_params
+A data.frame with properly formatted board_params
 }
 \description{
 This function simply provides a consistent format for the board
