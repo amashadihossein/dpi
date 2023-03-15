@@ -4,12 +4,14 @@ test_that("dpconnect_check when not connected", {
 })
 
 test_that("dpconnect_check with local board", {
-  # platform agnostic tempdir used for testing
+  # temporary tempfile, deleted at the end of the test
+  path <- withr::local_tempfile()
   board_params <- board_params_set_local(
     board_alias = "local_test_board",
-    folder = tempdir()
+    folder = path
   )
   # make sure we can connect first
+  # this will create daap/ directory under path tempdir
   expect_true(dp_connect(board_params = board_params))
 
   # result from dpconnect_check is a list of class local
