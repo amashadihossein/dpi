@@ -2,9 +2,9 @@
 #' @description This function simply provides a consistent format for the board
 #' parameters
 #' @param board_alias name of the board
-#' @param url url of the labkey server
+#' @param url url of the LabKey server
 #' @param folder path of the study folder where the data product will be stored
-#' @return A data.frame board_params
+#' @return A data.frame with properly formatted board_params
 #' @examples
 #' \dontrun{
 #' board_params_set_labkey(
