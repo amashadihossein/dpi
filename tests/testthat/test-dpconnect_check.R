@@ -5,7 +5,7 @@ test_that("dpconnect_check when not connected", {
 
 test_that("dpconnect_check with local board", {
   # temporary tempfile, deleted at the end of the test
-  path <- withr::local_tempfile()
+  path <- withr::local_tempdir()
   board_params <- board_params_set_local(
     board_alias = "local_test_board",
     folder = path
