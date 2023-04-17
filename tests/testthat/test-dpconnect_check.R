@@ -20,3 +20,23 @@ test_that("dpconnect_check with local board", {
   expect_named(connect_result, c("board", "name", "cache", "versions"))
   expect_equal(connect_result$name, "local_test_board")
 })
+
+test_that("dpconnect_check with s3 board", {
+  board_params <- board_params_set_s3(
+    board_alias = "s3_test_board",
+    bucket_name = "daapr-test",
+    region = "us-east-1"
+  )
+  creds <- creds_set_aws(
+    key = Sys.getenv("AWS_KEY"),
+    secret = Sys.getenv("AWS_SECRET")
+  )
+
+  # result from dpconnect_check is a list of class s3, but need to connect first
+  expect_true(dp_connect(board_params = board_params, creds = creds))
+  connect_result <- dpconnect_check(board_params = board_params,
+                                    creds = creds)
+  expect_s3_class(connect_result, "s3")
+  expect_named(connect_result, c("board", "name", "cache", "versions"))
+  expect_equal(connect_result$name, "s3_test_board")
+})
