@@ -24,9 +24,9 @@ dp_make_params <- function(url, repo_token){
     stop(cli::cli_alert_danger("This dp repo may be a private repo. Please supply a token parameter."))
   }
 
-  domain_components <- urltools::suffix_extract(urltools::domain(x = url))
-
-  top_level_domain <- paste0(".", domain_components$suffix)
+  domain_components <- httr::parse_url(url)
+  str_split_hostname <- unlist(stringr::str_split(domain_components$hostname, pattern = "\\."))
+  top_level_domain <- paste0(".", str_split_hostname[length(str_split_hostname)])
   split_github_url <- unlist(stringr::str_split(url, pattern = top_level_domain))
 
   api_url <- paste0(split_github_url[1], top_level_domain, "/api/v3")
