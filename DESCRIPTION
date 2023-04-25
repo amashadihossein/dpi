@@ -26,8 +26,7 @@ Imports:
     httr,
     rlang,
     stringr,
-    yaml,
-    urltools
+    yaml
 Suggests:
     knitr,
     rmarkdown,
