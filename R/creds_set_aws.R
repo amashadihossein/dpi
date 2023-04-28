@@ -10,7 +10,7 @@
 #' data product
 #' @param secret aws secret associated with your access to the bucket housing
 #' the data product
-#' @return A data.frame aws_creds containing properly formatted AWS credentials
+#' @return A data.frame containing properly formatted AWS credentials
 #' @examples
 #' \dontrun{
 #' aws_creds <- creds_set_aws(

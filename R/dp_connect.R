@@ -1,11 +1,11 @@
 #' @title Connect to the Data Product Board
 #' @description Connect to the board housing the data product. This is needed
 #' prior to interacting with the content of the board.
-#' @param creds When `local_board`, creds is ignored and need to be specified. 
-#' Otherwise, use creds_set_aws() or creds_set_labkey() to set this. It should
-#' @param board_params use `board_params_set_s3` or `board_params_set_labkey`
-#' for this. It contains the parameters for the board on which the data product
-#' is pinned
+#' @param creds use `creds_set_aws` or `creds_set_labkey` to set this. When using
+#' a local board, creds is ignored and does not need to be specified.
+#' @param board_params use `board_params_set_s3`, `board_params_set_labkey`, or
+#' `board_params_set_local` to specify board parameters. It contains the information
+#' for the board on which the data product is pinned.
 #' @param ... other parameters
 #' @return TRUE
 #'
@@ -17,7 +17,8 @@
 #' )
 #' board_params <- board_params_set_s3(
 #'   board_alias = "board_alias",
-#'   bucket_name = "bucket_name", region = "us-east-1"
+#'   bucket_name = "bucket_name",
+#'   region = "us-east-1"
 #' )
 #' dp_connect(board_params, aws_creds)
 #' }
@@ -91,21 +92,21 @@ dp_connect.labkey_board <- function(board_params, creds, ...) {
 
 #'@export
 dp_connect.local_board <- function(board_params, creds = NULL, ...){
-  
+
   args <- list(...)
   board_subdir <- "daap"
   if(length(args$board_subdir) >0)
     board_subdir <- args$board_subdir
-  
+
   # Register the board
   pins::board_register(board = "local",
                        name = board_params$board_alias,
                        cache =  file.path(board_params$folder, board_subdir),
                        versions = T)
-  
-  
+
+
   return(TRUE)
-  
+
 }
 
 

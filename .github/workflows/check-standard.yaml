@@ -26,6 +26,8 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      AWS_KEY: ${{ secrets.AWS_KEY }}
+      AWS_SECRET: ${{ secrets.AWS_SECRET }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:

@@ -1,10 +1,10 @@
 #' @title List Data Products on a Board
 #' @description  List all data products on a named board you are connected with.
-#' It requires connection via dp_connet first.
-#' @param board_params use `board_params_set_s3` or `board_params_set_labkey`
-#' for this. It contains the parameters for the board on which the data product
-#' is pinned
-#' @return all data products on the board
+#' It requires connection via `dp_connect` first.
+#' @param board_params use `board_params_set_s3`, `board_params_set_labkey`, or
+#'`board_params_set_local` for this. It contains the parameters for the board
+#' on which the data product is pinned
+#' @return a tibble containing metadata of all versions of data products on board
 #'
 #' @examples
 #' \dontrun{
@@ -14,7 +14,8 @@
 #' )
 #' board_params <- board_params_set_s3(
 #'   board_alias = "board_alias",
-#'   bucket_name = "bucket_name", region = "us-east-1"
+#'   bucket_name = "bucket_name",
+#'   region = "us-east-1"
 #' )
 #' dp_connect(board_params, aws_creds)
 #' dp_list(board_params)

@@ -1,6 +1,6 @@
-#' @title Generate Labkey Credentials
-#' @param api_key Labkey API key for the user
-#' @return labkey_creds
+#' @title Generate LabKey Credentials
+#' @param api_key LabKey API key for the user
+#' @return A data.frame containing properly formatted LabKey credentials
 #' @examples
 #' \dontrun{
 #' creds_set_labkey(api_key = Sys.getenv("LABKEY_API_KEY"))

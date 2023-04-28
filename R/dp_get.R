@@ -1,12 +1,13 @@
 #' @title  Get the Data Object
-#' @description Load into working environment the data data object
-#' @param board_params use `board_params_set_s3` or `board_params_set_labkey`
-#' for this. It contains the parameters for the board on which the data product
-#' is pinned
-#' @param data_name data name on the board
-#' @param version data version pinned, default gets you the latest. Executed
-#' dp_list to see what's available
-#' @return dp pinned data
+#' @description Load into working environment the data product object
+#' @param board_params use `board_params_set_s3`, `board_params_set_labkey`, or
+#' `board_params_set_local` for this. It contains the parameters for the board
+#' on which the data product is pinned
+#' @param data_name name of the data product on the board, i.e. dp-cars-us001. To
+#' get a list of available data products, use `dp_list`
+#' @param version data version to retrieve. If not specified, will retrieve the latest
+#' version. Use `dp_list` to see available versions.
+#' @return data product object
 #'
 #' @examples
 #' \dontrun{
@@ -16,7 +17,8 @@
 #' )
 #' board_params <- board_params_set_s3(
 #'   board_alias = "board_alias",
-#'   bucket_name = "bucket_name", region = "us-east-1"
+#'   bucket_name = "bucket_name",
+#'   region = "us-east-1"
 #' )
 #' dp_connect(board_params, aws_creds)
 #' dp <- dp_get("dp-study-branch", board_params = board_params)
