@@ -43,8 +43,8 @@ dp_make_params <- function(url, repo_token=Sys.getenv("GITHUB_PAT")){
   http_status_code <- httr::status_code(retrieve_branch_name)
 
   if (http_status_code != 200) {
-    stop(cli::cli_alert_danger("PAT is not found in R environment or not correctly set up.
-        Make sure to pass or set up a token if this is a private repo. For e.g., Sys.setenv()"))
+    stop(cli::cli_alert_danger("GITHUB PAT is not found in R environment or not correctly set up.
+        Make sure to pass repo_token or set up GITHUB_PAT env var if this is a private repo. For e.g. using Sys.setenv()"))
   }
 
   branches_found <- httr::content(retrieve_branch_name)[[1]]['name']
@@ -104,7 +104,7 @@ dp_make_params <- function(url, repo_token=Sys.getenv("GITHUB_PAT")){
   check_if_creds_empty <- unname(unlist((params_list$creds))) == ""
 
   if (all(check_if_creds_empty)) {
-    warning("Creds not found. Make sure that you set creds in your R environment as described daapr vignettes.")
+    warning("Creds not found. Make sure that you set creds in your R environment as described in daapr vignettes.")
   }
   return(params_list)
 }
