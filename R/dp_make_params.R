@@ -74,12 +74,12 @@ dp_make_params <- function(url, repo_token=Sys.getenv("GITHUB_PAT")){
   yaml_log_tail <- ".daap/daap_log.yaml"
 
   split_github_url_dotcom <- paste0(split_github_url[1], top_level_domain)
-  public_githubusercontent <- paste0(raw_string,".githubusercontent",top_level_domain)
+  raw_githubusercontent <- paste0(raw_string,".githubusercontent",top_level_domain)
 
   if (is_enterprise_server) {
     path_repo_config <- file.path(split_github_url_dotcom, raw_string,split_github_url[2], branch_name, yaml_config_tail)
   } else {
-    path_repo_config <- file.path("https://", public_githubusercontent,split_github_url[2], branch_name, yaml_config_tail)
+    path_repo_config <- file.path("https://", raw_githubusercontent,split_github_url[2], branch_name, yaml_config_tail)
   }
 
   if(check_http_error) {
@@ -95,7 +95,7 @@ dp_make_params <- function(url, repo_token=Sys.getenv("GITHUB_PAT")){
   if (is_enterprise_server) {
     path_log <- file.path(split_github_url_dotcom, raw_string,split_github_url[2], branch_name, yaml_log_tail)
   } else {
-    path_log <- file.path("https://", public_githubusercontent,split_github_url[2], branch_name, yaml_log_tail)
+    path_log <- file.path("https://", raw_githubusercontent,split_github_url[2], branch_name, yaml_log_tail)
   }
 
   if(check_http_error) {
