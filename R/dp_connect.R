@@ -51,15 +51,13 @@ dp_connect.s3_board <- function(board_params, creds, ...) {
   }
 
   # Register the board
-  pins::board_register(
-    board = "s3",
-    name = board_params$board_alias,
+  pins::board_s3(
+    prefix = file.path(board_subdir, "/"),
     bucket = board_params$bucket_name,
-    versions = T,
-    key = key,
-    secret = secret,
-    path = board_subdir,
-    region = board_params$region
+    region = board_params$region,
+    access_key = key,
+    secret_access_key = secret,
+    versioned = T
   )
 
   return(TRUE)

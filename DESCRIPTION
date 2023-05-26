@@ -18,7 +18,7 @@ Imports:
     aws.signature,
     dplyr,
     glue,
-    pins (== 0.4.5.9001),
+    pins (== 1.2.0),
     magrittr,
     lubridate,
     ellipsis,
