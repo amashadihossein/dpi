@@ -64,7 +64,6 @@ dp_connect.s3_board <- function(board_params, creds, ...) {
 }
 
 
-
 #' @export
 dp_connect.labkey_board <- function(board_params, creds, ...) {
   args <- list(...)
