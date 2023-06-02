@@ -4,6 +4,7 @@
 #' @param url Repository URL
 #' @param repo_token Personal Access Token (PAT) needed to access the contents of
 #' the private repository
+#' @param branch_name Branch name of the data product repository
 #' @return Named list of dp params
 #'
 #' @examples
@@ -12,7 +13,7 @@
 #' dp_params <- dp_make_params(url = url, repo_token = Sys.getenv("GITHUB_PAT"))
 #' @export
 
-dp_make_params <- function(url, repo_token=Sys.getenv("GITHUB_PAT")){
+dp_make_params <- function(url, repo_token=Sys.getenv("GITHUB_PAT"), branch_name=NULL){
 
   check_http_error <- httr::http_error(url)
   GITHUB_API_URL <- "https://api.github.com"
@@ -58,15 +59,33 @@ dp_make_params <- function(url, repo_token=Sys.getenv("GITHUB_PAT")){
         Make sure to pass repo_token or set up GITHUB_PAT env var if this is a private repo. For e.g. using Sys.setenv()"))
   }
 
-  branches_found <- httr::content(retrieve_branch_name)[[1]]['name']
+  if (is.null(branch_name)) {
+    all_branches <- httr::content(retrieve_branch_name)
 
-  branch_name <- as.character(branches_found[[1]])
-  print(unlist(unname(branches_found)))
-  cli::cli_alert_warning(glue::glue("{length(branches_found)} branch/es found (see above). The `{branch_name}` is fetched."))
+    list_all_branches <- list()
+    for (branch in 1:length(all_branches)){
+      bn <- all_branches[[branch]]$name
+      list_all_branches[[branch]] <- bn
+    }
 
-  if (length(branches_found) > 1) {
-    print(unlist(unname(branches_found)))
-    cli::cli_alert_danger(glue::glue("{length(branches_found)} branches found (see above).  The `{branch_name}` is fetched."))
+    select_branch_name <- function(list_all_branches) {
+      user_input <- utils::menu(
+        choices = unlist(list_all_branches),
+        title = glue::glue(
+          "Multiple branches have been found.\
+          Which branch do you want to use?"
+        ),
+        graphics = F
+      )
+
+      final_branch_name <- unlist(list_all_branches)[user_input]
+      cli::cli_alert_warning(glue::glue("`{final_branch_name}` branch was selected to be used."))
+      return(final_branch_name)
+    }
+
+    selected_branch_name <- select_branch_name(list_all_branches = list_all_branches)
+  } else {
+    selected_branch_name <- branch_name
   }
 
   raw_string <- "raw"
@@ -77,9 +96,9 @@ dp_make_params <- function(url, repo_token=Sys.getenv("GITHUB_PAT")){
   raw_githubusercontent <- paste0(raw_string,".githubusercontent",top_level_domain)
 
   if (is_enterprise_server) {
-    path_repo_config <- file.path(split_github_url_dotcom, raw_string,split_github_url[2], branch_name, yaml_config_tail)
+    path_repo_config <- file.path(split_github_url_dotcom, raw_string,split_github_url[2], selected_branch_name, yaml_config_tail)
   } else {
-    path_repo_config <- file.path("https://", raw_githubusercontent,split_github_url[2], branch_name, yaml_config_tail)
+    path_repo_config <- file.path("https://", raw_githubusercontent,split_github_url[2], selected_branch_name, yaml_config_tail)
   }
 
   if(check_http_error) {
@@ -93,9 +112,9 @@ dp_make_params <- function(url, repo_token=Sys.getenv("GITHUB_PAT")){
   }
 
   if (is_enterprise_server) {
-    path_log <- file.path(split_github_url_dotcom, raw_string,split_github_url[2], branch_name, yaml_log_tail)
+    path_log <- file.path(split_github_url_dotcom, raw_string,split_github_url[2], selected_branch_name, yaml_log_tail)
   } else {
-    path_log <- file.path("https://", raw_githubusercontent,split_github_url[2], branch_name, yaml_log_tail)
+    path_log <- file.path("https://", raw_githubusercontent,split_github_url[2], selected_branch_name, yaml_log_tail)
   }
 
   if(check_http_error) {
