@@ -1,7 +1,7 @@
 #' @title Make dp params to connect to the Data Product Board
 #' @description Make dp params to connect to the Data Product Board. This is needed
 #' prior to interacting with the content of the board.
-#' @param url Repository URL
+#' @param github_repo_url Repository URL
 #' @param repo_token Personal Access Token (PAT) needed to access the contents of
 #' the private repository
 #' @param branch_name Branch name of the data product repository
@@ -9,31 +9,32 @@
 #'
 #' @examples
 #' \dontrun{
-#' url <- "https://github.com/<USERNAME>/<REPOSITORY NAME>"
-#' dp_params <- dp_make_params(url = url, repo_token = Sys.getenv("GITHUB_PAT"))
+#' github_repo_url <- "https://github.com/<USERNAME>/<REPOSITORY NAME>"
+#' dp_params <- dp_make_params(github_repo_url = github_repo_url, repo_token = Sys.getenv("GITHUB_PAT"))
+#' }
 #' @export
 
-dp_make_params <- function(url, repo_token=Sys.getenv("GITHUB_PAT"), branch_name=NULL){
+dp_make_params <- function(github_repo_url, repo_token=Sys.getenv("GITHUB_PAT"), branch_name=NULL){
 
-  check_http_error <- httr::http_error(url)
+  check_http_error <- httr::http_error(github_repo_url)
   GITHUB_API_URL <- "https://api.github.com"
 
-  if (missing(url)){
-    stop(cli::cli_alert_danger("url parameter cannot be missing"))
+  if (missing(github_repo_url)){
+    stop(cli::cli_alert_danger("github_repo_url parameter cannot be missing"))
   }
 
-  domain_components <- httr::parse_url(url)
+  domain_components <- httr::parse_url(github_repo_url)
 
   hostname <- domain_components$hostname
 
   is_enterprise_server <- !grepl(pattern = hostname, x=GITHUB_API_URL, fixed = T)
 
-  str_split_hostname <- unlist(stringr::str_split(domain_components$hostname, pattern = "\\."))
+  str_split_hostname <- unlist(strsplit(domain_components$hostname, split = "\\."))
   top_level_domain <- paste0(".", str_split_hostname[length(str_split_hostname)])
-  split_github_url <- unlist(stringr::str_split(url, pattern = top_level_domain))
+  split_github_url <- unlist(strsplit(github_repo_url, split = top_level_domain))
 
-  OWNER <- unlist(stringr::str_split(split_github_url[2], pattern = "/"))[2]
-  REPO <- unlist(stringr::str_split(split_github_url[2], pattern = "/"))[3]
+  OWNER <- unlist(strsplit(split_github_url[2], split = "/"))[2]
+  REPO <- unlist(strsplit(split_github_url[2], split = "/"))[3]
 
   if (is_enterprise_server) {
     api_url <- paste0(split_github_url[1], top_level_domain, "/api/v3")

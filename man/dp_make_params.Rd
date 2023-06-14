@@ -4,10 +4,14 @@
 \alias{dp_make_params}
 \title{Make dp params to connect to the Data Product Board}
 \usage{
-dp_make_params(url, repo_token = Sys.getenv("GITHUB_PAT"), branch_name = NULL)
+dp_make_params(
+  github_repo_url,
+  repo_token = Sys.getenv("GITHUB_PAT"),
+  branch_name = NULL
+)
 }
 \arguments{
-\item{url}{Repository URL}
+\item{github_repo_url}{Repository URL}
 
 \item{repo_token}{Personal Access Token (PAT) needed to access the contents of
 the private repository}
@@ -20,4 +24,10 @@ Named list of dp params
 \description{
 Make dp params to connect to the Data Product Board. This is needed
 prior to interacting with the content of the board.
+}
+\examples{
+\dontrun{
+github_repo_url <- "https://github.com/<USERNAME>/<REPOSITORY NAME>"
+dp_params <- dp_make_params(github_repo_url = github_repo_url, repo_token = Sys.getenv("GITHUB_PAT"))
+}
 }
