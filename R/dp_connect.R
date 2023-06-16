@@ -51,7 +51,7 @@ dp_connect.s3_board <- function(board_params, creds, ...) {
   }
 
   # Register the board
-  pins::board_s3(
+  board <- pins::board_s3(
     prefix = file.path(board_subdir, "/"),
     bucket = board_params$bucket_name,
     region = board_params$region,
@@ -60,7 +60,25 @@ dp_connect.s3_board <- function(board_params, creds, ...) {
     versioned = T
   )
 
-  return(TRUE)
+  tryCatch({
+    board <- pins::board_s3(
+      prefix = file.path(board_subdir, "/"),
+      bucket = board_params$bucket_name,
+      region = board_params$region,
+      access_key = key,
+      secret_access_key = secret,
+      versioned = T
+    )
+    return(board)
+  },
+    error = function(cond) {
+      cli::cli_alert_danger("Encountered error in dp_connect.")
+      cli::cli_alert_warning("Make sure crendentials passed are correct.")
+      cli::cli_alert_warning("Networking constraints (e.g. vpn) may be blocking communication.")
+      cli::cli_alert_danger(cond)
+    }
+  )
+  # return(TRUE)
 }
 
 
