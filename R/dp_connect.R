@@ -51,15 +51,6 @@ dp_connect.s3_board <- function(board_params, creds, ...) {
   }
 
   # Register the board
-  board <- pins::board_s3(
-    prefix = file.path(board_subdir, "/"),
-    bucket = board_params$bucket_name,
-    region = board_params$region,
-    access_key = key,
-    secret_access_key = secret,
-    versioned = T
-  )
-
   tryCatch({
     board <- pins::board_s3(
       prefix = file.path(board_subdir, "/"),
