@@ -32,7 +32,7 @@ dp_list <- function(board_params, board_object) {
   use_cache <- board_info$board == "local"
 
   dpboard_log <- try(pins::pin_read(
-    name = "dpboard-log",
+    name = file.path("dpboard-log", "/"),
     board = board_info
   ))
   if (!"data.frame" %in% class(dpboard_log)) {
