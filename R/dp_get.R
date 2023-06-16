@@ -39,8 +39,7 @@ dp_get <- function(board_params, board_object, data_name, version = NULL) {
   if (is_dpinput) {
     return(pins::pin_read(
       name = data_name, board = board_info,
-      version = version,
-      cache = use_cache
+      version = version
     ))
   }
 
@@ -67,8 +66,7 @@ dp_get <- function(board_params, board_object, data_name, version = NULL) {
   }
   dp <- pins::pin_read(
     name = data_name, board = board_info,
-    version = version,
-    cache = use_cache
+    version = version
   )
   return(dp)
 }

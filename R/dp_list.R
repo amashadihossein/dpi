@@ -33,8 +33,7 @@ dp_list <- function(board_params, board_object) {
 
   dpboard_log <- try(pins::pin_read(
     name = "dpboard-log",
-    board = board_info,
-    files = F, cache = use_cache
+    board = board_info
   ))
   if (!"data.frame" %in% class(dpboard_log)) {
     stop(cli::format_error(glue::glue(
