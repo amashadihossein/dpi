@@ -4,15 +4,14 @@
 \alias{dp_list}
 \title{List Data Products on a Board}
 \usage{
-dp_list(board_params, creds)
+dp_list(board_params, board_object)
 }
 \arguments{
 \item{board_params}{use \code{board_params_set_s3}, \code{board_params_set_labkey}, or
 \code{board_params_set_local} for this. It contains the parameters for the board
 on which the data product is pinned}
 
-\item{creds}{use \code{creds_set_aws} or \code{creds_set_labkey} to set this. When using
-a local board, creds is ignored and does not need to be specified.}
+\item{board_object}{board object from \code{dp_connect}}
 }
 \value{
 a tibble containing metadata of all versions of data products on board

@@ -4,8 +4,7 @@
 #' @param board_params use `board_params_set_s3`, `board_params_set_labkey`, or
 #'`board_params_set_local` for this. It contains the parameters for the board
 #' on which the data product is pinned
-#' @param creds use `creds_set_aws` or `creds_set_labkey` to set this. When using
-#' a local board, creds is ignored and does not need to be specified.
+#' @param board_object board object from `dp_connect`
 #' @return a tibble containing metadata of all versions of data products on board
 #'
 #' @examples
@@ -27,9 +26,9 @@
 #' @importFrom lubridate as_datetime
 #' @importFrom lubridate with_tz
 #' @export
-dp_list <- function(board_params, creds) {
-  board_info <- dp_connect(board_params = board_params, creds = creds)
-  # board_info  <- board_object
+dp_list <- function(board_params, board_object) {
+  # board_info <- dp_connect(board_params = board_params, creds = creds)
+  board_info  <- board_object
   use_cache <- board_info$board == "local"
 
   dpboard_log <- try(pins::pin_read(

@@ -3,8 +3,7 @@
 #' @param board_params use `board_params_set_s3`, `board_params_set_labkey`, or
 #' `board_params_set_local` for this. It contains the parameters for the board
 #' on which the data product is pinned
-#' @param creds use `creds_set_aws` or `creds_set_labkey` to set this. When using
-#' a local board, creds is ignored and does not need to be specified.
+#' @param board_object board object from `dp_connect`
 #' @param data_name name of the data product on the board, i.e. dp-cars-us001. To
 #' get a list of available data products, use `dp_list`
 #' @param version data version to retrieve. If not specified, will retrieve the latest
@@ -27,9 +26,9 @@
 #' }
 #' @importFrom dplyr .data
 #' @export
-dp_get <- function(board_params, creds, data_name, version = NULL) {
-  board_info <- dp_connect(board_params = board_params, creds = creds)
-  # board_info <- board_object
+dp_get <- function(board_params, board_object, data_name, version = NULL) {
+  # board_info <- dp_connect(board_params = board_params, creds = creds)
+  board_info <- board_object
   use_cache <- board_info$board == "local"
 
   is_dpinput <- rev(unlist(strsplit(
@@ -44,7 +43,7 @@ dp_get <- function(board_params, creds, data_name, version = NULL) {
     ))
   }
 
-  dp_ls <- dp_list(board_params = board_params, creds = creds)
+  dp_ls <- dp_list(board_params = board_params, board_object = board_info)
   available_datanames <- dp_ls %>%
     dplyr::filter(!.data$archived) %>%
     dplyr::pull(.data$dp_name)
