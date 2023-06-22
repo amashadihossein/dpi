@@ -9,7 +9,6 @@
 #' @param version data version to retrieve. If not specified, will retrieve the latest
 #' version. Use `dp_list` to see available versions.
 #' @return data product object
-#'
 #' @examples
 #' \dontrun{
 #' aws_creds <- creds_set_aws(
