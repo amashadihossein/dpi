@@ -22,7 +22,10 @@ Imports:
     magrittr,
     lubridate,
     ellipsis,
-    cli
+    cli,
+    httr,
+    rlang,
+    yaml
 Suggests:
     knitr,
     rmarkdown,
