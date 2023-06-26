@@ -37,7 +37,7 @@ dp_list <- function(board_params, board_object) {
   ))
   if (!"data.frame" %in% class(dpboard_log)) {
     stop(cli::format_error(glue::glue(
-      "Could not retrieve dpboard_log! Check",
+      "Could not retrieve dpboard_log!",
       "Check spelling, your connection and ",
       "your credentials!"
     )))

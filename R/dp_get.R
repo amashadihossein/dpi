@@ -42,18 +42,20 @@ dp_get <- function(board_params, board_object, data_name, version = NULL) {
     ))
   }
 
-  dp_ls <- dp_list(board_params = board_params, board_object = board_info)
-  available_datanames <- dp_ls %>%
-    dplyr::filter(!.data$archived) %>%
-    dplyr::pull(.data$dp_name)
+  # dp_ls <- dp_list(board_params = board_params, board_object = board_info)
+  # available_datanames <- dp_ls %>%
+  #   dplyr::filter(!.data$archived) %>%
+  #   dplyr::pull(.data$dp_name)
 
-  if (!data_name %in% available_datanames) {
+  else {
     stop(cli::format_error(glue::glue(
       "data_name {data_name} is either archived",
       " or not on this board. Check the ",
-      "data_name and board_alias"
+      "data_name and board_alias",
+      " or cannot read from the board."
     )))
   }
+
   if (length(version) > 0) {
     if (!version %in% (dp_ls$version)) {
       stop(cli::format_error(glue::glue(
