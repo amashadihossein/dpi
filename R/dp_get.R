@@ -3,7 +3,7 @@
 #' @param board_params use `board_params_set_s3`, `board_params_set_labkey`, or
 #' `board_params_set_local` for this. It contains the parameters for the board
 #' on which the data product is pinned
-#' @param creds creds
+#' @param board_object board object from `dp_connect`
 #' @param data_name name of the data product on the board, i.e. dp-cars-us001. To
 #' get a list of available data products, use `dp_list`
 #' @param version data version to retrieve. If not specified, will retrieve the latest
@@ -25,13 +25,9 @@
 #' }
 #' @importFrom dplyr .data
 #' @export
-dp_get <- function(board_params, creds = creds, data_name, version = NULL) {
+dp_get <- function(board_params, board_object, data_name, version = NULL) {
   # board_info <- dp_connect(board_params = board_params, creds = creds)
-  board_info <- dpi::dp_connect(
-    board_params = board_params, creds = creds,
-    board_subdir = file.path("dpinput/")
-  )
-
+  board_info <- board_object
   use_cache <- board_info$board == "local"
 
   is_dpinput <- rev(unlist(strsplit(
