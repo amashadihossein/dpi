@@ -31,7 +31,7 @@ dp_get <- function(board_params, board_object, data_name, version = NULL) {
   use_cache <- board_info$board == "local"
 
   is_dpinput <- rev(unlist(strsplit(
-    x = board_object$prefix,
+    x = board_info$prefix,
     split = "_|-|/"
   )))[1] == "dpinput"
 
