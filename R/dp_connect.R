@@ -33,7 +33,7 @@ dp_connect <- function(board_params, creds, ...) {
 #' @export
 dp_connect.s3_board <- function(board_params, creds, ...) {
   args <- list(...)
-  board_subdir <- "daap"
+  board_subdir <- "daap/"
   if (length(args$board_subdir) > 0) {
     board_subdir <- args$board_subdir
   }
