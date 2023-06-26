@@ -33,7 +33,7 @@ dp_connect <- function(board_params, creds, ...) {
 #' @export
 dp_connect.s3_board <- function(board_params, creds, ...) {
   args <- list(...)
-  board_subdir <- file.path("daap/")
+  board_subdir <- "daap/"
   if (length(args$board_subdir) > 0) {
     board_subdir <- args$board_subdir
   }
@@ -53,7 +53,7 @@ dp_connect.s3_board <- function(board_params, creds, ...) {
   # Register the board
   tryCatch({
     board <- pins::board_s3(
-      prefix = board_subdir,
+      prefix = file.path("daap/"),
       bucket = board_params$bucket_name,
       region = board_params$region,
       access_key = key,
