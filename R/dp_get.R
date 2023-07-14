@@ -13,7 +13,6 @@
 #'   secret = Sys.getenv("AWS_SECRET")
 #' )
 #' board_params <- board_params_set_s3(
-#'   board_alias = "board_alias",
 #'   bucket_name = "bucket_name",
 #'   region = "us-east-1"
 #' )
@@ -47,7 +46,7 @@ dp_get <- function(board_object, data_name, version = NULL) {
     stop(cli::format_error(glue::glue(
       "data_name {data_name} is either archived",
       " or not on this board. Check the ",
-      "data_name and board_alias",
+      "data_name",
       " or cannot read from the board."
     )))
   }
@@ -56,8 +55,7 @@ dp_get <- function(board_object, data_name, version = NULL) {
     if (!version %in% (dp_ls$version)) {
       stop(cli::format_error(glue::glue(
         "version {version} is not on this ",
-        "board. Check the version and ",
-        "board_alias"
+        "board. Check the version."
       )))
     }
   }

@@ -16,7 +16,6 @@
 #'   secret = Sys.getenv("AWS_SECRET")
 #' )
 #' board_params <- board_params_set_s3(
-#'   board_alias = "board_alias",
 #'   bucket_name = "bucket_name",
 #'   region = "us-east-1"
 #' )

@@ -23,7 +23,6 @@
 #
 # test_that("dpconnect_check with s3 board", {
 #   board_params <- board_params_set_s3(
-#     board_alias = "s3_test_board",
 #     bucket_name = "daapr-test",
 #     region = "us-east-1"
 #   )
