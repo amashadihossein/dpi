@@ -7,7 +7,7 @@
 #' `board_params_set_local` to specify board parameters. It contains the information
 #' for the board on which the data product is pinned.
 #' @param ... other parameters
-#' @return TRUE
+#' @return data product object
 #'
 #' @examples
 #' \dontrun{
@@ -19,7 +19,7 @@
 #'   bucket_name = "bucket_name",
 #'   region = "us-east-1"
 #' )
-#' dp_connect(board_params, aws_creds)
+#' board_object <- dp_connect(board_params, aws_creds)
 #' }
 #' @export
 dp_connect <- function(board_params, creds, ...) {

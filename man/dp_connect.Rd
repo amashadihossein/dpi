@@ -17,7 +17,7 @@ a local board, creds is ignored and does not need to be specified.}
 \item{...}{other parameters}
 }
 \value{
-TRUE
+data product object
 }
 \description{
 Connect to the board housing the data product. This is needed
@@ -33,6 +33,6 @@ board_params <- board_params_set_s3(
   bucket_name = "bucket_name",
   region = "us-east-1"
 )
-dp_connect(board_params, aws_creds)
+board_object <- dp_connect(board_params, aws_creds)
 }
 }
