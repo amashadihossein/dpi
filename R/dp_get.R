@@ -17,27 +17,26 @@
 #'   region = "us-east-1"
 #' )
 #' board_object <- dp_connect(board_params, aws_creds)
-#' dp <- dp_get(board_object, "dp-study-branch", data_name = "data-name")
+#' dp <- dp_get(board_object, data_name = "data-name")
 #' }
 #' @importFrom dplyr .data
 #' @export
 dp_get <- function(board_object, data_name, version = NULL) {
-  board_info <- board_object
-  use_cache <- board_info$board == "local"
+  # use_cache <- board_object$board == "local"
 
   is_dpinput <- rev(unlist(strsplit(
-    x = board_info$prefix,
+    x = board_object$prefix,
     split = "_|-|/"
   )))[1] == "dpinput"
 
   if (is_dpinput) {
     return(pins::pin_read(
-      name = data_name, board = board_info,
+      name = data_name, board = board_object,
       hash = version
     ))
   }
 
-  dp_ls <- dp_list(board_object = board_info)
+  dp_ls <- dp_list(board_object = board_object)
   available_datanames <- dp_ls %>%
     dplyr::filter(!.data$archived) %>%
     dplyr::pull(.data$dp_name)
@@ -60,8 +59,7 @@ dp_get <- function(board_object, data_name, version = NULL) {
     }
   }
   dp <- pins::pin_read(
-    name = data_name, board = board_info,
-    # version = version
+    name = data_name, board = board_object,
     hash = version
   )
   return(dp)

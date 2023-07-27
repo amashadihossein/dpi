@@ -82,13 +82,10 @@ dp_connect.local_board <- function(board_params, creds = NULL, ...){
     board_subdir <- args$board_subdir
 
   # Register the board
-  pins::board_register(board = "local",
-                       name = board_params$board_alias,
-                       cache =  file.path(board_params$folder, board_subdir),
-                       versions = T)
+  board <- pins::board_folder(path = fs::path(board_params$folder, board_subdir),
+                              versioned = T)
 
-
-  return(TRUE)
+  return(board)
 
 }
 

@@ -32,6 +32,6 @@ board_params <- board_params_set_s3(
   region = "us-east-1"
 )
 board_object <- dp_connect(board_params, aws_creds)
-dp <- dp_get(board_object, "dp-study-branch", data_name = "data-name")
+dp <- dp_get(board_object, data_name = "data-name")
 }
 }
