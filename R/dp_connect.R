@@ -82,7 +82,7 @@ dp_connect.local_board <- function(board_params, creds = NULL, ...){
     board_subdir <- args$board_subdir
 
   # Register the board
-  board <- pins::board_folder(path = fs::path(board_params$folder, board_subdir),
+  board <- pins::board_folder(path = file.path(board_params$folder, board_subdir),
                               versioned = T)
 
   return(board)

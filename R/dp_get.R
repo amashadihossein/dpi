@@ -24,10 +24,18 @@
 dp_get <- function(board_object, data_name, version = NULL) {
   # use_cache <- board_object$board == "local"
 
-  is_dpinput <- rev(unlist(strsplit(
-    x = board_object$prefix,
-    split = "_|-|/"
-  )))[1] == "dpinput"
+  # check for whether we're getting input or data product
+  if (board_object$board == "pins_board_folder") {
+    is_dpinput <- rev(unlist(strsplit(
+      x = board_object$path,
+      split = "_|-|/"
+    )))[1] == "dpinput"
+  } else {
+    is_dpinput <- rev(unlist(strsplit(
+      x = board_object$prefix,
+      split = "_|-|/"
+    )))[1] == "dpinput"
+  }
 
   if (is_dpinput) {
     return(pins::pin_read(
