@@ -1,7 +1,7 @@
 Package: dpi
 Type: Package
 Title: Data Product Programming Interface
-Version: 0.0.0.9008
+Version: 0.1.0
 Authors@R: c(
     person("Afshin", "Mashadi-Hossein", email = "amashadihossein@gmail.com", 
     role = c("aut", "cre")),
@@ -18,7 +18,7 @@ Imports:
     aws.signature,
     dplyr,
     glue,
-    pins (== 0.4.5.9001),
+    pins (>= 1.2.0),
     magrittr,
     lubridate,
     ellipsis,

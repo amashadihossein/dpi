@@ -7,17 +7,17 @@
 dp_connect(board_params, creds, ...)
 }
 \arguments{
-\item{board_params}{use \code{board_params_set_s3}, \code{board_params_set_labkey}, or
+\item{board_params}{use \code{board_params_set_s3} or
 \code{board_params_set_local} to specify board parameters. It contains the information
 for the board on which the data product is pinned.}
 
-\item{creds}{use \code{creds_set_aws} or \code{creds_set_labkey} to set this. When using
+\item{creds}{use \code{creds_set_aws} to set this. When using
 a local board, creds is ignored and does not need to be specified.}
 
 \item{...}{other parameters}
 }
 \value{
-TRUE
+data product object
 }
 \description{
 Connect to the board housing the data product. This is needed
@@ -30,10 +30,9 @@ aws_creds <- creds_set_aws(
   secret = Sys.getenv("AWS_SECRET")
 )
 board_params <- board_params_set_s3(
-  board_alias = "board_alias",
   bucket_name = "bucket_name",
   region = "us-east-1"
 )
-dp_connect(board_params, aws_creds)
+board_object <- dp_connect(board_params, aws_creds)
 }
 }

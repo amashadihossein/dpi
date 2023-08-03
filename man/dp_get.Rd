@@ -4,12 +4,10 @@
 \alias{dp_get}
 \title{Get the Data Object}
 \usage{
-dp_get(board_params, data_name, version = NULL)
+dp_get(board_object, data_name, version = NULL)
 }
 \arguments{
-\item{board_params}{use \code{board_params_set_s3}, \code{board_params_set_labkey}, or
-\code{board_params_set_local} for this. It contains the parameters for the board
-on which the data product is pinned}
+\item{board_object}{board object from \code{dp_connect}}
 
 \item{data_name}{name of the data product on the board, i.e. dp-cars-us001. To
 get a list of available data products, use \code{dp_list}}
@@ -30,11 +28,10 @@ aws_creds <- creds_set_aws(
   secret = Sys.getenv("AWS_SECRET")
 )
 board_params <- board_params_set_s3(
-  board_alias = "board_alias",
   bucket_name = "bucket_name",
   region = "us-east-1"
 )
-dp_connect(board_params, aws_creds)
-dp <- dp_get("dp-study-branch", board_params = board_params)
+board_object <- dp_connect(board_params, aws_creds)
+dp <- dp_get(board_object, data_name = "data-name")
 }
 }

@@ -4,11 +4,9 @@
 \alias{board_params_set_local}
 \title{Generate properly formatted board parameters for local board}
 \usage{
-board_params_set_local(board_alias, folder)
+board_params_set_local(folder)
 }
 \arguments{
-\item{board_alias}{name of the board}
-
 \item{folder}{path to data product storage folder. NOTE: as a general
 guidance this folder should be treated as a permanent location with immutable
 content. For example, a data product project folder \emph{is not} an appropriate
@@ -23,8 +21,6 @@ parameters
 }
 \examples{
 \dontrun{
-board_params_set_local(
-  board_alias = "xxxx",
-  folder = "xxxx")
+board_params_set_local(folder = "xxxx")
 }
 }
