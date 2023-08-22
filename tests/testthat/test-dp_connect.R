@@ -32,6 +32,8 @@ test_that("dp_connect with s3 board with bad creds", {
     secret = Sys.getenv("AWS_SECRET")
   )
 
-  # Should get an error message here, but not an actual error
-  expect_snapshot(dp_connect(board_params = board_params, creds = creds))
+  # Should get a message here, but not an actual error. Only matching part of the error message
+  suppressMessages(expect_message(
+    dp_connect(board_params = board_params, creds = creds),
+    "Encountered error in dp_connect"))
 })
