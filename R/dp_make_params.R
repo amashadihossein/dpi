@@ -142,11 +142,8 @@ dp_make_params <- function(github_repo_url, repo_token=Sys.getenv("GITHUB_PAT"),
   pins_version_message <- glue::glue(
     'This data product was built with a legacy version of pins.
     Please downgrade pins and all daapr packages using
-    remotes::install_github(repo = "amashadihossein/dpi@0.0.0.9008")
-    remotes::install_github(repo = "amashadihossein/dpbuild@0.0.0.9106")
-    remotes::install_github(repo = "amashadihossein/ddeploy@0.0.0.9016")
-    remotes::install_github(repo = "amashadihossein/daapr@0.0.0.9006")
-    remotes::install_github(repo = "amashadihossein/pins")'
+    remotes::install_github(repo = "amashadihossein/pins")
+    remotes::install_github(repo = "amashadihossein/dpi@0.0.0.9008")'
   )
 
   if (all(is_board_alias_in_board_params, is_pins_package_version_gt_1_2_0)) {
