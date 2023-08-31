@@ -134,20 +134,19 @@ dp_make_params <- function(github_repo_url, repo_token=Sys.getenv("GITHUB_PAT"),
   board_params <- read_config_from_repo$board_params_set_dried
   creds <- read_config_from_repo$creds_set_dried
 
-  # TODO it might be enough to just check for board_alias, pins version should be taken care of by dependencies
   is_board_alias_in_board_params <- "board_alias" %in% rlang::call_args_names(rlang::parse_expr(board_params))
 
-  installed_pins_version <- utils::packageVersion(pkg = "pins")
-  is_pins_package_version_gt_1_2_0 <- installed_pins_version  >= '1.2.0'
+  # installed_pins_version <- utils::packageVersion(pkg = "pins")
+  # is_pins_package_version_gt_1_2_0 <- installed_pins_version  >= '1.2.0'
 
   pins_version_message <- glue::glue(
     'This data product was built with a legacy version of pins.
-    Please downgrade pins and all daapr packages using
+    Please downgrade pins and dpi packages using
     remotes::install_github(repo = "amashadihossein/pins")
     remotes::install_github(repo = "amashadihossein/dpi@0.0.0.9008")'
   )
 
-  if (all(is_board_alias_in_board_params, is_pins_package_version_gt_1_2_0)) {
+  if (is_board_alias_in_board_params) {
     stop(cli::cli_alert_danger(pins_version_message))
   }
 

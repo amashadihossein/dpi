@@ -5,6 +5,7 @@
 #' guidance this folder should be treated as a permanent location with immutable
 #' content. For example, a data product project folder *is not* an appropriate
 #' directory.
+#' @param board_alias `r lifecycle::badge("deprecated")` this argument is deprecated with newer pins
 #'
 #' @return A data.frame with properly formatted board_params
 #' @examples
@@ -12,7 +13,17 @@
 #' board_params_set_local(folder = "xxxx")
 #' }
 #' @export
-board_params_set_local <- function(folder){
+board_params_set_local <- function(folder, board_alias = deprecated()){
+
+  if (lifecycle::is_present(board_alias)) {
+    lifecycle::deprecate_stop("0.1.0", "board_params_set_local(board_alias)",
+                              details = c(
+                                " " = "If you are trying to access an existing data product built with an older package version, please downgrade pins and dpi packages using:",
+                                " " = "remotes::install_github(repo = 'amashadihossein/pins')",
+                                " " = "remotes::install_github(repo = 'amashadihossein/dpi@0.0.0.9008')"
+                              )
+    )
+  }
 
   board_params <- data.frame(board_type = "local_board",
                              folder = folder,
