@@ -134,6 +134,7 @@ dp_make_params <- function(github_repo_url, repo_token=Sys.getenv("GITHUB_PAT"),
   board_params <- read_config_from_repo$board_params_set_dried
   creds <- read_config_from_repo$creds_set_dried
 
+  # TODO it might be enough to just check for board_alias, pins version should be taken care of by dependencies
   is_board_alias_in_board_params <- "board_alias" %in% rlang::call_args_names(rlang::parse_expr(board_params))
 
   installed_pins_version <- utils::packageVersion(pkg = "pins")

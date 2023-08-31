@@ -49,21 +49,21 @@ dp_connect.s3_board <- function(board_params, creds, ...) {
     secret <- aws_creds$secret
   }
 
-  is_board_alias_in_board_params <- "board_alias" %in% names(board_params)
-
-  installed_pins_version <- utils::packageVersion(pkg = "pins")
-  is_pins_package_version_gt_1_2_0 <- installed_pins_version  >= '1.2.0'
-
-  pins_version_message <- glue::glue(
-    'This data product was built with a legacy version of pins.
-    Please downgrade pins and dpi packages using
-    remotes::install_github(repo = "amashadihossein/pins")
-    remotes::install_github(repo = "amashadihossein/dpi@0.0.0.9008")'
-  )
-
-  if (all(is_board_alias_in_board_params, is_pins_package_version_gt_1_2_0)) {
-    stop(cli::cli_alert_danger(pins_version_message))
-  }
+  # is_board_alias_in_board_params <- "board_alias" %in% names(board_params)
+#
+#   installed_pins_version <- utils::packageVersion(pkg = "pins")
+#   is_pins_package_version_gt_1_2_0 <- installed_pins_version  >= '1.2.0'
+#
+#   pins_version_message <- glue::glue(
+#     'This data product was built with a legacy version of pins.
+#     Please downgrade pins and dpi packages using
+#     remotes::install_github(repo = "amashadihossein/pins")
+#     remotes::install_github(repo = "amashadihossein/dpi@0.0.0.9008")'
+#   )
+#
+#   if (all(is_board_alias_in_board_params, is_pins_package_version_gt_1_2_0)) {
+#     stop(cli::cli_alert_danger(pins_version_message))
+#   }
 
   # Register the board
   tryCatch({
