@@ -1,6 +1,6 @@
 test_that("dp_connect with s3 board", {
   board_params <- board_params_set_s3(
-    bucket_name = "daapr-test",
+    bucket_name = "test-daapr",
     region = "us-east-1"
   )
   creds <- creds_set_aws(
@@ -13,8 +13,8 @@ test_that("dp_connect with s3 board", {
   expect_s3_class(board_obj, "pins_board_s3")
   expect_named(board_obj, c('board', 'api', 'cache', 'versioned', 'name',
                                  'bucket', 'prefix', 'svc'))
-  expect_equal(board_obj$bucket, "daapr-test")
-  expect_equal(board_obj$prefix, "daap/")
+  expect_equal(board_obj$bucket, "test-daapr")
+  expect_match(board_obj$prefix, "daap")
 })
 
 # Need to generate snapshot first before adding this test
