@@ -12,12 +12,7 @@
 #' @export
 creds_set_labkey <- function(api_key) {
   lifecycle::deprecate_stop("0.1.0", "creds_set_labkey()",
-                            details = c(
-                              " " = "LabKey functionality has been temporarily removed from dpi. Please downgrade pins and dpi packages using:",
-                              " " = "remotes::install_github(repo = 'amashadihossein/pins')",
-                              " " = "remotes::install_github(repo = 'amashadihossein/dpi@0.0.0.9008')"
-                            )
-  )
+                            details = downgrade_message(labkey = T))
 
   labkey_creds <- data.frame(api_key = api_key)
 
