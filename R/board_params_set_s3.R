@@ -16,12 +16,7 @@
 board_params_set_s3 <- function(bucket_name, region, board_alias = deprecated()) {
   if (lifecycle::is_present(board_alias)) {
     lifecycle::deprecate_stop("0.1.0", "board_params_set_s3(board_alias)",
-                              details = c(
-                                " " = "If you are trying to access an existing data product built with an older package version, please downgrade pins and dpi packages using:",
-                                " " = "remotes::install_github(repo = 'amashadihossein/pins')",
-                                " " = "remotes::install_github(repo = 'amashadihossein/dpi@0.0.0.9008')"
-                              )
-    )
+                              details = downgrade_message())
   }
 
   if (!isTRUE(region %in% aws_availability_zones)) {

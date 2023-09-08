@@ -13,7 +13,6 @@
 #' dp_params <- dp_make_params(github_repo_url = github_repo_url, repo_token = Sys.getenv("GITHUB_PAT"))
 #' }
 #' @export
-
 dp_make_params <- function(github_repo_url, repo_token=Sys.getenv("GITHUB_PAT"), branch_name=NULL){
 
   check_http_error <- httr::http_error(github_repo_url)
@@ -136,12 +135,9 @@ dp_make_params <- function(github_repo_url, repo_token=Sys.getenv("GITHUB_PAT"),
 
   is_board_alias_in_board_params <- "board_alias" %in% rlang::call_args_names(rlang::parse_expr(board_params))
 
-  # installed_pins_version <- utils::packageVersion(pkg = "pins")
-  # is_pins_package_version_gt_1_2_0 <- installed_pins_version  >= '1.2.0'
-
   pins_version_message <- glue::glue(
     'This data product was built with a legacy version of pins.
-    Please downgrade pins and dpi packages using
+    To access a legacy data product, downgrade pins and dpi packages using:
     remotes::install_github(repo = "amashadihossein/pins")
     remotes::install_github(repo = "amashadihossein/dpi@0.0.0.9008")'
   )
@@ -165,6 +161,36 @@ dp_make_params <- function(github_repo_url, repo_token=Sys.getenv("GITHUB_PAT"),
   return(params_list)
 }
 
+#' helper function to return downgrade messages for lifecycle warnings
+#' @param labkey T/F whether to include temporary labkey message
+#' @noRd
+downgrade_message <- function(labkey = F) {
+  if (labkey) {
+    return(c(
+      " " = "LabKey functionality has been temporarily removed from daapr. To access a legacy
+      data product, downgrade pins and dpi packages using:",
+      " " = "remotes::install_github(repo = 'amashadihossein/pins')",
+      " " = "remotes::install_github(repo = 'amashadihossein/dpi@0.0.0.9008')",
+      " " = "",
+      " " = "To continue building a legacy data product, downgrade all daapr packages:",
+      " " = "remotes::install_github(repo = 'amashadihossein/dpbuild@0.0.0.9106')",
+      " " = "remotes::install_github(repo = 'amashadihossein/ddeploy@0.0.0.9016')",
+      " " = "remotes::install_github(repo = 'amashadihossein/daapr@0.0.0.9006')"
+    ))
+  } else {
+    return(c(
+      " " = "This data product was built with a legacy version of pins. To access a legacy
+      data product, downgrade pins and dpi packages using:",
+      " " = "remotes::install_github(repo = 'amashadihossein/pins')",
+      " " = "remotes::install_github(repo = 'amashadihossein/dpi@0.0.0.9008')",
+      " " = "",
+      " " = "To continue building a legacy data product, downgrade all daapr packages:",
+      " " = "remotes::install_github(repo = 'amashadihossein/dpbuild@0.0.0.9106')",
+      " " = "remotes::install_github(repo = 'amashadihossein/ddeploy@0.0.0.9016')",
+      " " = "remotes::install_github(repo = 'amashadihossein/daapr@0.0.0.9006')"
+    ))
+  }
+}
 
 #' @title Hydrate a dried called function
 #' @description execute and returns the value of function call given its textual
