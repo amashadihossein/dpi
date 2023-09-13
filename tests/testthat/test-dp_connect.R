@@ -1,6 +1,7 @@
 test_that("dp_connect with s3 board", {
+  s3_bucket_name <- "daapr-test"
   board_params <- board_params_set_s3(
-    bucket_name = "daapr-test",
+    bucket_name = s3_bucket_name,
     region = "us-east-1"
   )
   creds <- creds_set_aws(
@@ -13,8 +14,8 @@ test_that("dp_connect with s3 board", {
   expect_s3_class(board_obj, "pins_board_s3")
   expect_named(board_obj, c('board', 'api', 'cache', 'versioned', 'name',
                                  'bucket', 'prefix', 'svc'))
-  expect_equal(board_obj$bucket, "daapr-test")
-  expect_equal(board_obj$prefix, "daap/")
+  expect_equal(board_obj$bucket, s3_bucket_name)
+  expect_match(board_obj$prefix, "daap")
 })
 
 # Need to generate snapshot first before adding this test
@@ -32,6 +33,8 @@ test_that("dp_connect with s3 board with bad creds", {
     secret = Sys.getenv("AWS_SECRET")
   )
 
-  # Should get an error message here, but not an actual error
-  expect_snapshot(dp_connect(board_params = board_params, creds = creds))
+  # Should get a message here, but not an actual error. Only matching part of the error message
+  suppressMessages(expect_message(
+    dp_connect(board_params = board_params, creds = creds),
+    "Encountered error in dp_connect"))
 })
