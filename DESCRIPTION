@@ -25,7 +25,8 @@ Imports:
     cli,
     httr,
     rlang,
-    yaml
+    yaml,
+    lifecycle
 Suggests:
     knitr,
     rmarkdown,

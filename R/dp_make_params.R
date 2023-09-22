@@ -13,7 +13,6 @@
 #' dp_params <- dp_make_params(github_repo_url = github_repo_url, repo_token = Sys.getenv("GITHUB_PAT"))
 #' }
 #' @export
-
 dp_make_params <- function(github_repo_url, repo_token=Sys.getenv("GITHUB_PAT"), branch_name=NULL){
 
   check_http_error <- httr::http_error(github_repo_url)
@@ -134,6 +133,19 @@ dp_make_params <- function(github_repo_url, repo_token=Sys.getenv("GITHUB_PAT"),
   board_params <- read_config_from_repo$board_params_set_dried
   creds <- read_config_from_repo$creds_set_dried
 
+  is_board_alias_in_board_params <- "board_alias" %in% rlang::call_args_names(rlang::parse_expr(board_params))
+
+  pins_version_message <- glue::glue(
+    'This data product was built with a legacy version of pins.
+    To access a legacy data product, downgrade pins and dpi packages using:
+    remotes::install_github(repo = "amashadihossein/pins")
+    remotes::install_github(repo = "amashadihossein/dpi@0.0.0.9008")'
+  )
+
+  if (is_board_alias_in_board_params) {
+    stop(cli::cli_alert_danger(pins_version_message))
+  }
+
   params_list <- list(
     board_params=fn_hydrate(board_params),
     creds=fn_hydrate(creds),
@@ -147,20 +159,5 @@ dp_make_params <- function(github_repo_url, repo_token=Sys.getenv("GITHUB_PAT"),
     cli::cli_alert_warning(glue::glue("Warning: Creds value is missing. Make sure that you set creds in your R environment as described in daapr vignettes."))
   }
   return(params_list)
-}
-
-
-#' @title Hydrate a dried called function
-#' @description execute and returns the value of function call given its textual
-#'  (dried) representation
-#' @param fn_called a function called
-#' @return value of the called function given its textual representation
-#' @examples \dontrun{
-#' fn_hydrate(fn_dry(sum(log(1:10))))
-#' }
-#' @keywords internal
-
-fn_hydrate <- function(dried_fn) {
-  return(eval(rlang::parse_expr(dried_fn)))
 }
 
