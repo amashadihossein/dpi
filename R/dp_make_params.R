@@ -79,11 +79,16 @@ dp_make_params <- function(github_repo_url, repo_token=Sys.getenv("GITHUB_PAT"),
       )
 
       final_branch_name <- unlist(list_all_branches)[user_input]
-      cli::cli_alert_warning(glue::glue("`{final_branch_name}` branch was selected to be used."))
       return(final_branch_name)
     }
 
-    selected_branch_name <- select_branch_name(list_all_branches = list_all_branches)
+    if (length(list_all_branches) == 1L) {
+      selected_branch_name <- unlist(list_all_branches)
+    } else  {
+      selected_branch_name <- select_branch_name(list_all_branches = list_all_branches)
+    }
+    cli::cli_alert_warning(glue::glue("`{selected_branch_name}` branch was selected to be used."))
+
   } else {
     selected_branch_name <- branch_name
   }
