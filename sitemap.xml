@@ -22,6 +22,9 @@
     <loc>https://amashadihossein.github.io/dpi/index.html</loc>
   </url>
   <url>
+    <loc>https://amashadihossein.github.io/dpi/news/index.html</loc>
+  </url>
+  <url>
     <loc>https://amashadihossein.github.io/dpi/reference/board_params_set_labkey.html</loc>
   </url>
   <url>
@@ -46,7 +49,13 @@
     <loc>https://amashadihossein.github.io/dpi/reference/dp_list.html</loc>
   </url>
   <url>
-    <loc>https://amashadihossein.github.io/dpi/reference/dpconnect_check.html</loc>
+    <loc>https://amashadihossein.github.io/dpi/reference/dp_make_params.html</loc>
+  </url>
+  <url>
+    <loc>https://amashadihossein.github.io/dpi/reference/dpi-package.html</loc>
+  </url>
+  <url>
+    <loc>https://amashadihossein.github.io/dpi/reference/fn_hydrate.html</loc>
   </url>
   <url>
     <loc>https://amashadihossein.github.io/dpi/reference/index.html</loc>

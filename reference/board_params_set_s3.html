@@ -12,7 +12,7 @@ parameters"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
     
     <a class="navbar-brand me-2" href="../index.html">dpi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,6 +25,9 @@ parameters"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -54,36 +57,36 @@ parameters</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">board_params_set_s3</span><span class="op">(</span><span class="va">board_alias</span>, <span class="va">bucket_name</span>, <span class="va">region</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">board_params_set_s3</span><span class="op">(</span><span class="va">bucket_name</span>, <span class="va">region</span>, board_alias <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>board_alias</dt>
-<dd><p>name of the board</p></dd>
-
-
-<dt>bucket_name</dt>
+    <dl><dt>bucket_name</dt>
 <dd><p>name of the s3 bucket</p></dd>
 
 
 <dt>region</dt>
 <dd><p>AWS region for the s3 bucket e.g. "us-east-1" or "us-west-1"</p></dd>
 
+
+<dt>board_alias</dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> this argument is deprecated with newer pins</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A data.frame board_params</p>
+<p>A data.frame with properly formatted board_params</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="fu">board_params_set_s3</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  board_alias <span class="op">=</span> <span class="st">"board_alias"</span>,</span></span>
-<span class="r-in"><span>  bucket_name <span class="op">=</span> <span class="st">"bucket_name"</span>, region <span class="op">=</span> <span class="st">"us-east-1"</span></span></span>
+<span class="r-in"><span>  bucket_name <span class="op">=</span> <span class="st">"bucket_name"</span>,</span></span>
+<span class="r-in"><span>  region <span class="op">=</span> <span class="st">"us-east-1"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>

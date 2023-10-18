@@ -12,7 +12,7 @@ prior to interacting with the content of the board."><!-- mathjax --><script src
     
     <a class="navbar-brand me-2" href="../index.html">dpi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,6 +25,9 @@ prior to interacting with the content of the board."><!-- mathjax --><script src
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -60,14 +63,14 @@ prior to interacting with the content of the board.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>board_params</dt>
-<dd><p>use <code>board_params_set_s3</code> or <code>board_params_set_labkey</code>
-for this. It contains the parameters for the board on which the data product
-is pinned</p></dd>
+<dd><p>use <code>board_params_set_s3</code> or
+<code>board_params_set_local</code> to specify board parameters. It contains the information
+for the board on which the data product is pinned.</p></dd>
 
 
 <dt>creds</dt>
-<dd><p>When <code>local_board</code>, creds is ignored and need to be specified.
-Otherwise, use creds_set_aws() or creds_set_labkey() to set this. It should</p></dd>
+<dd><p>use <code>creds_set_aws</code> to set this. When using
+a local board, creds is ignored and does not need to be specified.</p></dd>
 
 
 <dt>...</dt>
@@ -78,7 +81,7 @@ Otherwise, use creds_set_aws() or creds_set_labkey() to set this. It should</p><
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>TRUE</p>
+<p>data product object</p>
     </div>
 
     <div class="section level2">
@@ -89,10 +92,10 @@ Otherwise, use creds_set_aws() or creds_set_labkey() to set this. It should</p><
 <span class="r-in"><span>  secret <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"AWS_SECRET"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">board_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="board_params_set_s3.html">board_params_set_s3</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  board_alias <span class="op">=</span> <span class="st">"board_alias"</span>,</span></span>
-<span class="r-in"><span>  bucket_name <span class="op">=</span> <span class="st">"bucket_name"</span>, region <span class="op">=</span> <span class="st">"us-east-1"</span></span></span>
+<span class="r-in"><span>  bucket_name <span class="op">=</span> <span class="st">"bucket_name"</span>,</span></span>
+<span class="r-in"><span>  region <span class="op">=</span> <span class="st">"us-east-1"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">dp_connect</span><span class="op">(</span><span class="va">board_params</span>, <span class="va">aws_creds</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">board_object</span> <span class="op">&lt;-</span> <span class="fu">dp_connect</span><span class="op">(</span><span class="va">board_params</span>, <span class="va">aws_creds</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
