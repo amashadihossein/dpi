@@ -4,23 +4,22 @@
 \alias{dp_get}
 \title{Get the Data Object}
 \usage{
-dp_get(board_params, data_name, version = NULL)
+dp_get(board_object, data_name, version = NULL)
 }
 \arguments{
-\item{board_params}{use \code{board_params_set_s3} or \code{board_params_set_labkey}
-for this. It contains the parameters for the board on which the data product
-is pinned}
+\item{board_object}{board object from \code{dp_connect}}
 
-\item{data_name}{data name on the board}
+\item{data_name}{name of the data product on the board, i.e. dp-cars-us001. To
+get a list of available data products, use \code{dp_list}}
 
-\item{version}{data version pinned, default gets you the latest. Executed
-dp_list to see what's available}
+\item{version}{data version to retrieve. If not specified, will retrieve the latest
+version. Use \code{dp_list} to see available versions.}
 }
 \value{
-dp pinned data
+data product object
 }
 \description{
-Load into working environment the data data object
+Load into working environment the data product object
 }
 \examples{
 \dontrun{
@@ -29,10 +28,10 @@ aws_creds <- creds_set_aws(
   secret = Sys.getenv("AWS_SECRET")
 )
 board_params <- board_params_set_s3(
-  board_alias = "board_alias",
-  bucket_name = "bucket_name", region = "us-east-1"
+  bucket_name = "bucket_name",
+  region = "us-east-1"
 )
-dp_connect(board_params, aws_creds)
-dp <- dp_get("dp-study-branch", board_params = board_params)
+board_object <- dp_connect(board_params, aws_creds)
+dp <- dp_get(board_object, data_name = "data-name")
 }
 }

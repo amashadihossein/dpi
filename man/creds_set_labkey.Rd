@@ -13,7 +13,9 @@ creds_set_labkey(api_key)
 labkey_creds
 }
 \description{
-Generate Labkey Credentials
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+Get credentials for LabKey board
 }
 \examples{
 \dontrun{

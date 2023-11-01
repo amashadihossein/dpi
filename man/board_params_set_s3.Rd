@@ -4,17 +4,17 @@
 \alias{board_params_set_s3}
 \title{Generate Properly Formatted Board Parameters}
 \usage{
-board_params_set_s3(board_alias, bucket_name, region)
+board_params_set_s3(bucket_name, region, board_alias = deprecated())
 }
 \arguments{
-\item{board_alias}{name of the board}
-
 \item{bucket_name}{name of the s3 bucket}
 
 \item{region}{AWS region for the s3 bucket e.g. "us-east-1" or "us-west-1"}
+
+\item{board_alias}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} this argument is deprecated with newer pins}
 }
 \value{
-A data.frame board_params
+A data.frame with properly formatted board_params
 }
 \description{
 This function simply provides a consistent format for the board
@@ -23,8 +23,8 @@ parameters
 \examples{
 \dontrun{
 board_params_set_s3(
-  board_alias = "board_alias",
-  bucket_name = "bucket_name", region = "us-east-1"
+  bucket_name = "bucket_name",
+  region = "us-east-1"
 )
 }
 }

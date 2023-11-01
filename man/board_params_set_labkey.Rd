@@ -17,6 +17,8 @@ board_params_set_labkey(board_alias, url, folder = "")
 A data.frame board_params
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
 This function simply provides a consistent format for the board
 parameters
 }

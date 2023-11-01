@@ -1,5 +1,8 @@
 #' @title Generate Properly Formatted Board Parameters
-#' @description This function simply provides a consistent format for the board
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' This function simply provides a consistent format for the board
 #' parameters
 #' @param board_alias name of the board
 #' @param url url of the labkey server
@@ -14,6 +17,9 @@
 #' }
 #' @export
 board_params_set_labkey <- function(board_alias, url, folder = "") {
+  lifecycle::deprecate_stop("0.1.0", "board_params_set_labkey()",
+                            details = downgrade_message(labkey = T))
+
   board_params <- data.frame(
     board_type = "labkey_board",
     board_alias = board_alias, folder = folder,

@@ -22,7 +22,7 @@ data product}
 the data product}
 }
 \value{
-A data.frame aws_creds containing properly formatted AWS credentials
+A data.frame containing properly formatted AWS credentials
 }
 \description{
 This function simply provides a consistent format for aws

@@ -26,6 +26,8 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      AWS_KEY: ${{ secrets.AWS_KEY }}
+      AWS_SECRET: ${{ secrets.AWS_SECRET }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:
@@ -41,7 +43,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck, github::amashadihossein/pins
+          extra-packages: any::rcmdcheck
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2

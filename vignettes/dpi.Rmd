@@ -22,8 +22,8 @@ library(dpi)
 
 This package aims to provide a minimalist and uniform interface for retrieving 
 data products and the associated metadata no matter where the data product is 
-housed. Currently, s3 and labkey are two types of remote repositories for 
-housing data products. 
+housed. Currently, s3, local, and LabKey are three types of remote repositories for 
+housing data products. Note: LabKey functionality has been temporarily deprecated. 
 
 This packages leverages the `pins` package for accessing data. As such, it 
 leverage the concept of `boards` for organizing data into **data spaces**. As 
@@ -33,7 +33,7 @@ policy. In this example, a `board` is not dissimilar to the
 idea of a directory or folder. A board can be instantiated on different data 
 platforms (e.g. AWS s3) supported by `pins` or its extensions. 
 
-As different data platforms (e.g. s3 vs. labkey) have their own specific url and
+As different data platforms (e.g. s3 vs. LabKey) have their own specific url and
 ways of authentication, different parameters need to be set up for how 
 connection to the remote data repository is to be established. Once the 
 connection is established, however, all other interactions (e.g. list, get, 
@@ -58,35 +58,29 @@ for the repository you need to access.
 
 ## Board parameters
 
-Currently data products housed on either Labkey or AWS s3 are supported. 
-
 - For s3, you need to know the bucket name and the region.
-- For Labkey, you need to know the url of platform and specific folder.
+- For LabKey, you need to know the url of platform and specific folder.
+- For local boards, you only need to provide the path of the local folder
 
 
 ## Format board parameters
 
-For S3, you need to provide an alias that signifies the data space this data 
-product could belong to. 
+For S3, you need to provide the s3 bucket name and region
 
 ```{r, eval=FALSE}
-board_params_s3 <- board_params_set_s3(
-  board_alias = "an_alias_for_data_board",
+board_params <- board_params_set_s3(
   bucket_name = "bucket_name",
   region = "us-east-1"
 )
 ```
 
-The Labkey parameters for a data product will have pattern as given below
+For local, you need to provide the absolute folder path
 
 ```{r, eval=FALSE}
-board_params_labkey <- board_params_set_labkey(
-  board_alias = "labkey",
-  url = "https:url_to_labkey/labkey",
+board_params <- board_params_set_local(
   folder = "/project_folder/subfolder"
 )
 ```
-
 
 
 ## Format your credentials
@@ -100,7 +94,7 @@ variables in conjunction with secret management packages like `keyring`. Below,
 exemplifies this pattern, where the env variables are set using 
 `Sys.setenv("AWS_KEY" = "xxxx")` in console, or using `keyring`,
 `Sys.setenv("AWS_KEY" = keyring::key_get(service = "AWS_KEY")`. Similarly, 
-"AWS_SCRET" can be set as an environment variable.
+"AWS_SECRET" can be set as an environment variable.
 
 
 The signature for creds for AWS s3 is takes two parameters.
@@ -110,13 +104,6 @@ aws_creds <- creds_set_aws(
   key = Sys.getenv("AWS_KEY"),
   secret = Sys.getenv("AWS_SECRET")
 )
-```
-
-
-If the data board was to be set up on Labkey, the signature for creds only 
-takes one parameter `api_key`
-```{r, eval=FALSE}
-labkey_creds <- creds_set_labkey(api_key = Sys.getenv("LABKEY_API_KEY"))
 ```
 
 
@@ -130,26 +117,26 @@ use the same set of function and format no matter where the data is housed.
 Then we can connect to the board.
 
 ```{r, eval=FALSE}
-dp_connect(board_params = board_params_s3, creds = aws_creds)
+board_object <- dp_connect(board_params = board_params, creds = aws_creds)
 ```
 
 ## Work with the board
 
 List what data products available on this board we just connected to. Note we 
-need to connect first in order to list.
+need to pass the board object in order to list available data products. 
 
 ```{r, eval=FALSE}
-dp_list(board_params = board_params_s3)
+dp_list(board_object = board_object)
 ```
 
 ## Retrieve data
 
-Load data into the working environment, e.g. as object `dp`.
+Load data into the working environment, e.g. as object `dp`. Specifying version is optional. 
 
 ```{r, eval=FALSE}
 dp <- dp_get(
+  board_object = board_object,
   data_name = "dp-studyid_branchid",
-  board_params = board_params_s3,
   version = "c5a51c3"
 )
 ```

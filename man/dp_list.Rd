@@ -4,19 +4,17 @@
 \alias{dp_list}
 \title{List Data Products on a Board}
 \usage{
-dp_list(board_params)
+dp_list(board_object)
 }
 \arguments{
-\item{board_params}{use \code{board_params_set_s3} or \code{board_params_set_labkey}
-for this. It contains the parameters for the board on which the data product
-is pinned}
+\item{board_object}{board object from \code{dp_connect}}
 }
 \value{
-all data products on the board
+a tibble containing metadata of all versions of data products on board
 }
 \description{
 List all data products on a named board you are connected with.
-It requires connection via dp_connet first.
+It requires connection via \code{dp_connect} first.
 }
 \examples{
 \dontrun{
@@ -25,11 +23,11 @@ aws_creds <- creds_set_aws(
   secret = Sys.getenv("AWS_SECRET")
 )
 board_params <- board_params_set_s3(
-  board_alias = "board_alias",
-  bucket_name = "bucket_name", region = "us-east-1"
+  bucket_name = "bucket_name",
+  region = "us-east-1"
 )
-dp_connect(board_params, aws_creds)
-dp_list(board_params)
+board_object <- dp_connect(board_params, aws_creds)
+dp_list(board_object)
 }
 
 }
