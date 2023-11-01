@@ -84,8 +84,9 @@
 </h2>
 <p>This package aims to provide a minimalist and uniform interface for
 retrieving data products and the associated metadata no matter where the
-data product is housed. Currently, s3 and labkey are two types of remote
-repositories for housing data products.</p>
+data product is housed. Currently, s3, local, and LabKey are three types
+of remote repositories for housing data products. Note: LabKey
+functionality has been temporarily deprecated.</p>
 <p>This packages leverages the <code>pins</code> package for accessing
 data. As such, it leverage the concept of <code>boards</code> for
 organizing data into <strong>data spaces</strong>. As an example, a team
@@ -95,7 +96,7 @@ governance policy. In this example, a <code>board</code> is not
 dissimilar to the idea of a directory or folder. A board can be
 instantiated on different data platforms (e.g. AWS s3) supported by
 <code>pins</code> or its extensions.</p>
-<p>As different data platforms (e.g. s3 vs. labkey) have their own
+<p>As different data platforms (e.g. s3 vs. LabKey) have their own
 specific url and ways of authentication, different parameters need to be
 set up for how connection to the remote data repository is to be
 established. Once the connection is established, however, all other
@@ -122,31 +123,26 @@ have working credentials for the repository you need to access.</p>
 <div class="section level3">
 <h3 id="board-parameters">Board parameters<a class="anchor" aria-label="anchor" href="#board-parameters"></a>
 </h3>
-<p>Currently data products housed on either Labkey or AWS s3 are
-supported.</p>
 <ul>
 <li>For s3, you need to know the bucket name and the region.</li>
-<li>For Labkey, you need to know the url of platform and specific
+<li>For LabKey, you need to know the url of platform and specific
 folder.</li>
+<li>For local boards, you only need to provide the path of the local
+folder</li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="format-board-parameters">Format board parameters<a class="anchor" aria-label="anchor" href="#format-board-parameters"></a>
 </h3>
-<p>For S3, you need to provide an alias that signifies the data space
-this data product could belong to.</p>
+<p>For S3, you need to provide the s3 bucket name and region</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">board_params_s3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/board_params_set_s3.html">board_params_set_s3</a></span><span class="op">(</span></span>
-<span>  board_alias <span class="op">=</span> <span class="st">"an_alias_for_data_board"</span>,</span>
+<code class="sourceCode R"><span><span class="va">board_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/board_params_set_s3.html">board_params_set_s3</a></span><span class="op">(</span></span>
 <span>  bucket_name <span class="op">=</span> <span class="st">"bucket_name"</span>,</span>
 <span>  region <span class="op">=</span> <span class="st">"us-east-1"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>The Labkey parameters for a data product will have pattern as given
-below</p>
+<p>For local, you need to provide the absolute folder path</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">board_params_labkey</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/board_params_set_labkey.html">board_params_set_labkey</a></span><span class="op">(</span></span>
-<span>  board_alias <span class="op">=</span> <span class="st">"labkey"</span>,</span>
-<span>  url <span class="op">=</span> <span class="st">"https:url_to_labkey/labkey"</span>,</span>
+<code class="sourceCode R"><span><span class="va">board_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/board_params_set_local.html">board_params_set_local</a></span><span class="op">(</span></span>
 <span>  folder <span class="op">=</span> <span class="st">"/project_folder/subfolder"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -164,17 +160,13 @@ pattern, where the env variables are set using
 <code>Sys.setenv("AWS_KEY" = "xxxx")</code> in console, or using
 <code>keyring</code>,
 <code>Sys.setenv("AWS_KEY" = keyring::key_get(service = "AWS_KEY")</code>.
-Similarly, “AWS_SCRET” can be set as an environment variable.</p>
+Similarly, “AWS_SECRET” can be set as an environment variable.</p>
 <p>The signature for creds for AWS s3 is takes two parameters.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aws_creds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/creds_set_aws.html">creds_set_aws</a></span><span class="op">(</span></span>
 <span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"AWS_KEY"</span><span class="op">)</span>,</span>
 <span>  secret <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"AWS_SECRET"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>If the data board was to be set up on Labkey, the signature for creds
-only takes one parameter <code>api_key</code></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">labkey_creds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/creds_set_labkey.html">creds_set_labkey</a></span><span class="op">(</span>api_key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"LABKEY_API_KEY"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -187,26 +179,27 @@ is housed.</p>
 <h3 id="connect-to-the-board">Connect to the board<a class="anchor" aria-label="anchor" href="#connect-to-the-board"></a>
 </h3>
 <p>Then we can connect to the board.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/dp_connect.html">dp_connect</a></span><span class="op">(</span>board_params <span class="op">=</span> <span class="va">board_params_s3</span>, creds <span class="op">=</span> <span class="va">aws_creds</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">board_object</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dp_connect.html">dp_connect</a></span><span class="op">(</span>board_params <span class="op">=</span> <span class="va">board_params</span>, creds <span class="op">=</span> <span class="va">aws_creds</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="work-with-the-board">Work with the board<a class="anchor" aria-label="anchor" href="#work-with-the-board"></a>
 </h3>
 <p>List what data products available on this board we just connected to.
-Note we need to connect first in order to list.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/dp_list.html">dp_list</a></span><span class="op">(</span>board_params <span class="op">=</span> <span class="va">board_params_s3</span><span class="op">)</span></span></code></pre></div>
+Note we need to pass the board object in order to list available data
+products.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/dp_list.html">dp_list</a></span><span class="op">(</span>board_object <span class="op">=</span> <span class="va">board_object</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="retrieve-data">Retrieve data<a class="anchor" aria-label="anchor" href="#retrieve-data"></a>
 </h3>
 <p>Load data into the working environment, e.g. as object
-<code>dp</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code>dp</code>. Specifying version is optional.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dp_get.html">dp_get</a></span><span class="op">(</span></span>
+<span>  board_object <span class="op">=</span> <span class="va">board_object</span>,</span>
 <span>  data_name <span class="op">=</span> <span class="st">"dp-studyid_branchid"</span>,</span>
-<span>  board_params <span class="op">=</span> <span class="va">board_params_s3</span>,</span>
 <span>  version <span class="op">=</span> <span class="st">"c5a51c3"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>

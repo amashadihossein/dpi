@@ -92,25 +92,24 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Get the list of board parameters</span></span>
-<span><span class="va">board_params_s3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/board_params_set_s3.html">board_params_set_s3</a></span><span class="op">(</span></span>
-<span>  board_alias <span class="op">=</span> <span class="st">"an_alias_for_data_board"</span>,</span>
+<span><span class="va">board_params</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/board_params_set_s3.html">board_params_set_s3</a></span><span class="op">(</span></span>
 <span>  bucket_name <span class="op">=</span> <span class="st">"bucket_name"</span>,</span>
-<span>  region <span class="op">=</span> <span class="st">"specific_region"</span></span>
-<span><span class="op">)</span> <span class="co"># e.g. "us-east-1"</span></span>
+<span>  region <span class="op">=</span> <span class="st">"specific_region"</span> <span class="co"># e.g. "us-east-1"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Connect to the board</span></span>
-<span><span class="fu"><a href="reference/dp_connect.html">dp_connect</a></span><span class="op">(</span>board_params <span class="op">=</span> <span class="va">board_params</span>, creds <span class="op">=</span> <span class="va">aws_creds</span><span class="op">)</span></span>
+<span><span class="va">board_object</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/dp_connect.html">dp_connect</a></span><span class="op">(</span>board_params <span class="op">=</span> <span class="va">board_params</span>, creds <span class="op">=</span> <span class="va">aws_creds</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># List what's available</span></span>
-<span><span class="fu"><a href="reference/dp_list.html">dp_list</a></span><span class="op">(</span>board_params <span class="op">=</span> <span class="va">board_params</span><span class="op">)</span></span>
+<span><span class="co"># List what's available on the board</span></span>
+<span><span class="fu"><a href="reference/dp_list.html">dp_list</a></span><span class="op">(</span>board_object <span class="op">=</span> <span class="va">board_object</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Retrieve the latest data. Alternatively retrieve specific version by passing</span></span>
 <span><span class="co"># the version id to dp_get</span></span>
 <span><span class="fu"><a href="reference/dp_get.html">dp_get</a></span><span class="op">(</span></span>
+<span>  board_object <span class="op">=</span> <span class="va">board_object</span>,</span>
 <span>  data_name <span class="op">=</span> <span class="st">"dp-studyid_branchid"</span>,</span>
-<span>  board_params <span class="op">=</span> <span class="va">board_params_s3</span>,</span>
-<span>  version <span class="op">=</span> <span class="st">"specific_version"</span></span>
-<span><span class="op">)</span> <span class="co"># e.g. "c5a51c3"</span></span></code></pre></div>
+<span>  version <span class="op">=</span> <span class="st">"specific_version"</span> <span class="co"># e.g. "c5a51c3"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="related-documentation">Related documentation<a class="anchor" aria-label="anchor" href="#related-documentation"></a>
