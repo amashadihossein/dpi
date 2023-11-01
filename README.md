@@ -39,25 +39,24 @@ aws_creds <- creds_set_aws(
 )
 
 # Get the list of board parameters
-board_params_s3 <- board_params_set_s3(
-  board_alias = "an_alias_for_data_board",
+board_params <- board_params_set_s3(
   bucket_name = "bucket_name",
-  region = "specific_region"
-) # e.g. "us-east-1"
+  region = "specific_region" # e.g. "us-east-1"
+)
 
 # Connect to the board
-dp_connect(board_params = board_params, creds = aws_creds)
+board_object <- dp_connect(board_params = board_params, creds = aws_creds)
 
-# List what's available
-dp_list(board_params = board_params)
+# List what's available on the board
+dp_list(board_object = board_object)
 
 # Retrieve the latest data. Alternatively retrieve specific version by passing
 # the version id to dp_get
 dp_get(
+  board_object = board_object,
   data_name = "dp-studyid_branchid",
-  board_params = board_params_s3,
-  version = "specific_version"
-) # e.g. "c5a51c3"
+  version = "specific_version" # e.g. "c5a51c3"
+)
 ```
 
 ## Related documentation
