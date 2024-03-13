@@ -11,7 +11,7 @@ downgrade_message <- function(labkey = F) {
       " " = "",
       " " = "To continue building a legacy data product, downgrade all daapr packages:",
       " " = "remotes::install_github(repo = 'amashadihossein/dpbuild@v0.0.0.9106')",
-      " " = "remotes::install_github(repo = 'amashadihossein/ddeploy@v0.0.0.9016')",
+      " " = "remotes::install_github(repo = 'amashadihossein/dpdeploy@v0.0.0.9016')",
       " " = "remotes::install_github(repo = 'amashadihossein/daapr@v0.0.0.9006')"
     ))
   } else {
@@ -23,7 +23,7 @@ downgrade_message <- function(labkey = F) {
       " " = "",
       " " = "To continue building a legacy data product, downgrade all daapr packages:",
       " " = "remotes::install_github(repo = 'amashadihossein/dpbuild@v0.0.0.9106')",
-      " " = "remotes::install_github(repo = 'amashadihossein/ddeploy@v0.0.0.9016')",
+      " " = "remotes::install_github(repo = 'amashadihossein/dpdeploy@v0.0.0.9016')",
       " " = "remotes::install_github(repo = 'amashadihossein/daapr@v0.0.0.9006')"
     ))
   }

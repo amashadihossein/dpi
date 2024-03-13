@@ -1,3 +1,8 @@
+# dpi 0.1.1
+
+* Fixed issue #29 where `dp_get()` could not pull old pin versions by hash. Now using hash to look up version number to pass to `pin_read()`
+* Fixed typos in downgrade messages
+
 # dpi 0.1.0
 
 ## Breaking changes
