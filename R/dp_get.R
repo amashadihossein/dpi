@@ -22,7 +22,6 @@
 #' @importFrom dplyr .data
 #' @export
 dp_get <- function(board_object, data_name, version = NULL) {
-  # use_cache <- board_object$board == "local"
 
   # check for whether we're getting input or data product
   if (board_object$board == "pins_board_folder") {
@@ -37,38 +36,46 @@ dp_get <- function(board_object, data_name, version = NULL) {
     )))[1] == "dpinput"
   }
 
-  if (is_dpinput) {
-    return(pins::pin_read(
-      name = data_name, board = board_object,
-      hash = version
-    ))
+  # only check if pin name exists if it's not an input
+  if (!is_dpinput) {
+    dp_ls <- dp_list(board_object = board_object)
+    available_datanames <- dp_ls %>%
+      dplyr::filter(!.data$archived) %>%
+      dplyr::pull(.data$dp_name)
+
+    if (!data_name %in% available_datanames) {
+      stop(cli::format_error(glue::glue(
+        "data_name {data_name} is either archived",
+        " or not on this board. Check the ",
+        "data_name",
+        " or cannot read from the board."
+      )))
+    }
   }
 
-  dp_ls <- dp_list(board_object = board_object)
-  available_datanames <- dp_ls %>%
-    dplyr::filter(!.data$archived) %>%
-    dplyr::pull(.data$dp_name)
-
-  if (!data_name %in% available_datanames) {
-    stop(cli::format_error(glue::glue(
-      "data_name {data_name} is either archived",
-      " or not on this board. Check the ",
-      "data_name",
-      " or cannot read from the board."
-    )))
-  }
-
+  # If we're trying to get a specific version, look up hash
   if (length(version) > 0) {
-    if (!version %in% (dp_ls$version)) {
+    pin_versions <- pins::pin_versions(
+      board = board_object,
+      name = data_name
+    )
+    if (!version %in% (pin_versions$hash)) {
       stop(cli::format_error(glue::glue(
         "version {version} is not on this ",
         "board. Check the version."
       )))
+    } else {
+      specified_version <- version
+      version <- pin_versions %>% dplyr::filter(hash == specified_version) %>%
+        dplyr::pull(version)
+      # TODO check in case this matches more than one row??
     }
   }
+
+  # get pin, specifying version if provided
   dp <- pins::pin_read(
     name = data_name, board = board_object,
-    hash = version
+    version = version
   )
   return(dp)
 }

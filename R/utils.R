@@ -7,24 +7,24 @@ downgrade_message <- function(labkey = F) {
       " " = "LabKey functionality has been temporarily removed from daapr. To access a legacy
       data product, downgrade pins and dpi packages using:",
       " " = "remotes::install_github(repo = 'amashadihossein/pins')",
-      " " = "remotes::install_github(repo = 'amashadihossein/dpi@0.0.0.9008')",
+      " " = "remotes::install_github(repo = 'amashadihossein/dpi@v0.0.0.9008')",
       " " = "",
       " " = "To continue building a legacy data product, downgrade all daapr packages:",
-      " " = "remotes::install_github(repo = 'amashadihossein/dpbuild@0.0.0.9106')",
-      " " = "remotes::install_github(repo = 'amashadihossein/ddeploy@0.0.0.9016')",
-      " " = "remotes::install_github(repo = 'amashadihossein/daapr@0.0.0.9006')"
+      " " = "remotes::install_github(repo = 'amashadihossein/dpbuild@v0.0.0.9106')",
+      " " = "remotes::install_github(repo = 'amashadihossein/dpdeploy@v0.0.0.9016')",
+      " " = "remotes::install_github(repo = 'amashadihossein/daapr@v0.0.0.9006')"
     ))
   } else {
     return(c(
       " " = "This data product was built with a legacy version of pins. To access a legacy
       data product, downgrade pins and dpi packages using:",
       " " = "remotes::install_github(repo = 'amashadihossein/pins')",
-      " " = "remotes::install_github(repo = 'amashadihossein/dpi@0.0.0.9008')",
+      " " = "remotes::install_github(repo = 'amashadihossein/dpi@v0.0.0.9008')",
       " " = "",
       " " = "To continue building a legacy data product, downgrade all daapr packages:",
-      " " = "remotes::install_github(repo = 'amashadihossein/dpbuild@0.0.0.9106')",
-      " " = "remotes::install_github(repo = 'amashadihossein/ddeploy@0.0.0.9016')",
-      " " = "remotes::install_github(repo = 'amashadihossein/daapr@0.0.0.9006')"
+      " " = "remotes::install_github(repo = 'amashadihossein/dpbuild@v0.0.0.9106')",
+      " " = "remotes::install_github(repo = 'amashadihossein/dpdeploy@v0.0.0.9016')",
+      " " = "remotes::install_github(repo = 'amashadihossein/daapr@v0.0.0.9006')"
     ))
   }
 }

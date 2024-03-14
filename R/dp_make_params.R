@@ -144,7 +144,7 @@ dp_make_params <- function(github_repo_url, repo_token=Sys.getenv("GITHUB_PAT"),
     'This data product was built with a legacy version of pins.
     To access a legacy data product, downgrade pins and dpi packages using:
     remotes::install_github(repo = "amashadihossein/pins")
-    remotes::install_github(repo = "amashadihossein/dpi@0.0.0.9008")'
+    remotes::install_github(repo = "amashadihossein/dpi@v0.0.0.9008")'
   )
 
   if (is_board_alias_in_board_params) {
