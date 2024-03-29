@@ -1,5 +1,5 @@
 #' helper function to return downgrade messages for lifecycle warnings
-#' @param labkey T/F whether to include temporary labkey message
+#' @param labkey T/F whether to include temporary LabKey message
 #' @noRd
 downgrade_message <- function(labkey = F) {
   if (labkey) {

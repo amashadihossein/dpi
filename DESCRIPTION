@@ -26,7 +26,8 @@ Imports:
     httr,
     rlang,
     yaml,
-    lifecycle
+    lifecycle,
+    pinsLabkey
 Suggests:
     knitr,
     rmarkdown,
@@ -36,3 +37,5 @@ Suggests:
 BugReports: https://github.com/amashadihossein/dpi/issues
 VignetteBuilder: knitr
 Config/testthat/edition: 3
+Remotes:  
+    github::camorosi/pinsLabkey
