@@ -86,7 +86,7 @@ dp_connect.labkey_board <- function(board_params, creds, ...) {
       base_url = board_params$url,
       folder = board_params$folder,
       versioned = T,
-      path = board_subdir
+      subdir = board_subdir
       )
     return(board)
   },
