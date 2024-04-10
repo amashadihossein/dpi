@@ -49,6 +49,13 @@ dp_connect.s3_board <- function(board_params, creds, ...) {
     secret <- aws_creds$secret
   }
 
+  # pins only checks for paws.storage in interactive sessions, so checking here
+  if (!requireNamespace("paws.storage", quietly = TRUE)) {
+    stop(
+      "Package \"paws.storage\" must be installed to use s3 boards.",
+      call. = FALSE
+    )
+  }
   # Register the board
   tryCatch({
     board <- pins::board_s3(
