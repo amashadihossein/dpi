@@ -66,9 +66,15 @@ dp_get <- function(board_object, data_name, version = NULL) {
       )))
     } else {
       specified_version <- version
-      version <- pin_versions %>% dplyr::filter(hash == specified_version) %>%
+      version <- pin_versions %>% dplyr::filter(.data$hash == specified_version) %>%
         dplyr::pull(version)
-      # TODO check in case this matches more than one row??
+      # Check in case we've manage to pin the same hash more than once
+      if (length(version) > 1) {
+        version <- version[length(version)]
+        message(paste0("More than one pin version found with hash ",
+                       specified_version, ". Using latest version: ",
+                       version))
+      }
     }
   }
 
