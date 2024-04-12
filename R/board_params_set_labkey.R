@@ -1,24 +1,20 @@
 #' @title Generate Properly Formatted Board Parameters
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' This function simply provides a consistent format for the board
+#' @description This function simply provides a consistent format for the board
 #' parameters
 #' @param board_alias name of the board
-#' @param url url of the labkey server
+#' @param url url of the LabKey server
 #' @param folder path of the study folder where the data product will be stored
 #' @return A data.frame board_params
 #' @examples
 #' \dontrun{
 #' board_params_set_labkey(
-#'   board_alias = "xxxx",
-#'   folder = "xxxx"
+#'   board_alias = "labkey-board",
+#'   url = "https://learn.labkey.com/",
+#'   folder = "folder_name"
 #' )
 #' }
 #' @export
 board_params_set_labkey <- function(board_alias, url, folder = "") {
-  lifecycle::deprecate_stop("0.1.0", "board_params_set_labkey()",
-                            details = downgrade_message(labkey = T))
 
   board_params <- data.frame(
     board_type = "labkey_board",
