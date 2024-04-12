@@ -1,7 +1,7 @@
 Package: dpi
 Type: Package
 Title: Data Product Programming Interface
-Version: 0.1.1
+Version: 0.2.0
 Authors@R: c(
     person("Afshin", "Mashadi-Hossein", email = "amashadihossein@gmail.com", 
     role = c("aut", "cre")),
@@ -37,5 +37,5 @@ Suggests:
 BugReports: https://github.com/amashadihossein/dpi/issues
 VignetteBuilder: knitr
 Config/testthat/edition: 3
-Remotes:  
+Remotes: 
     github::camorosi/pinsLabkey

@@ -1,3 +1,8 @@
+# dpi 0.2.0
+
+* Added back support for LabKey boards. `pinsLabkey` is now a dependency. 
+* When working with s3 boards, `dp_connect()` now throws an error if `paws.labkey` is not installed.
+
 # dpi 0.1.1
 
 * Fixed issue #29 where `dp_get()` could not pull old pin versions by hash. Now using hash to look up version number to pass to `pin_read()`
