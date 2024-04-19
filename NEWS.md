@@ -1,7 +1,7 @@
 # dpi 0.2.0
 
-* Added back support for LabKey boards. `pinsLabkey` is now a dependency. 
-* When working with s3 boards, `dp_connect()` now throws an error if `paws.labkey` is not installed.
+* Added back support for LabKey boards (#32). `pinsLabkey` is now a dependency. 
+* When working with s3 boards, `dp_connect()` now throws an error if `paws.labkey` is not installed (#33).
 
 # dpi 0.1.1
 
