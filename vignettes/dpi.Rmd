@@ -23,7 +23,7 @@ library(dpi)
 This package aims to provide a minimalist and uniform interface for retrieving 
 data products and the associated metadata no matter where the data product is 
 housed. Currently, s3, local, and LabKey are three types of remote repositories for 
-housing data products. Note: LabKey functionality has been temporarily deprecated. 
+housing data products. 
 
 This packages leverages the `pins` package for accessing data. As such, it 
 leverage the concept of `boards` for organizing data into **data spaces**. As 

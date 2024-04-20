@@ -29,7 +29,12 @@ dp_get <- function(board_object, data_name, version = NULL) {
       x = board_object$path,
       split = "_|-|/"
     )))[1] == "dpinput"
-  } else {
+  } else if (board_object$board == "pins_board_labkey") {
+    is_dpinput <- rev(unlist(strsplit(
+      x = board_object$subdir,
+      split = "_|-|/"
+    )))[1] == "dpinput"
+  } else { # s3 board
     is_dpinput <- rev(unlist(strsplit(
       x = board_object$prefix,
       split = "_|-|/"
@@ -55,10 +60,17 @@ dp_get <- function(board_object, data_name, version = NULL) {
 
   # If we're trying to get a specific version, look up hash
   if (length(version) > 0) {
-    pin_versions <- pins::pin_versions(
-      board = board_object,
-      name = data_name
-    )
+    if (board_object$board == "pins_board_labkey") {
+      pin_versions <- pinsLabkey::pin_versions(
+        board = board_object,
+        name = data_name
+      )
+    } else {
+      pin_versions <- pins::pin_versions(
+        board = board_object,
+        name = data_name
+      )
+    }
     if (!version %in% (pin_versions$hash)) {
       stop(cli::format_error(glue::glue(
         "version {version} is not on this ",
@@ -66,16 +78,30 @@ dp_get <- function(board_object, data_name, version = NULL) {
       )))
     } else {
       specified_version <- version
-      version <- pin_versions %>% dplyr::filter(hash == specified_version) %>%
+      version <- pin_versions %>% dplyr::filter(.data$hash == specified_version) %>%
         dplyr::pull(version)
-      # TODO check in case this matches more than one row??
+      # Check in case we've manage to pin the same hash more than once
+      if (length(version) > 1) {
+        version <- version[length(version)]
+        message(paste0("More than one pin version found with hash ",
+                       specified_version, ". Using latest version: ",
+                       version))
+      }
     }
   }
 
   # get pin, specifying version if provided
-  dp <- pins::pin_read(
-    name = data_name, board = board_object,
-    version = version
-  )
+  if (board_object$board == "pins_board_labkey") {
+    dp <- pinsLabkey::pin_read(
+      name = data_name, board = board_object,
+      version = version
+    )
+  } else {
+    dp <- pins::pin_read(
+      name = data_name, board = board_object,
+      version = version
+    )
+  }
+
   return(dp)
 }

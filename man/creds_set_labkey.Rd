@@ -2,19 +2,17 @@
 % Please edit documentation in R/creds_set_labkey.R
 \name{creds_set_labkey}
 \alias{creds_set_labkey}
-\title{Generate Labkey Credentials}
+\title{Generate LabKey Credentials}
 \usage{
 creds_set_labkey(api_key)
 }
 \arguments{
-\item{api_key}{Labkey API key for the user}
+\item{api_key}{LabKey API key for the user}
 }
 \value{
 labkey_creds
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
-
 Get credentials for LabKey board
 }
 \examples{
