@@ -1,7 +1,7 @@
 #' @title Create formatted parameters that specify a LabKey board
 #' 
 #' @description Build a data frame that contains all of the parameters
-#'   needed to connect to a LabKey board.
+#'   needed to specify a LabKey pin board.
 #' 
 #' @param board_alias A short name for the board.
 #' @param url The URL of the LabKey server.

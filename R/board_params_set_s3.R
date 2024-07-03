@@ -1,7 +1,7 @@
 #' @title Create formatted parameters that specify an s3 bucket board
 #'
 #' @description Build a data frame that contains all of the parameters
-#'   needed to connect to an s3 bucket board.
+#'   needed to specify an s3 bucket pin board.
 #'
 #' @param bucket_name The name of the s3 bucket where the data product will be
 #'   stored.

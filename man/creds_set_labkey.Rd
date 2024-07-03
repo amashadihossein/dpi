@@ -2,18 +2,21 @@
 % Please edit documentation in R/creds_set_labkey.R
 \name{creds_set_labkey}
 \alias{creds_set_labkey}
-\title{Generate LabKey Credentials}
+\title{Create formatted credentials for connecting to a LabKey board}
 \usage{
 creds_set_labkey(api_key)
 }
 \arguments{
-\item{api_key}{LabKey API key for the user}
+\item{api_key}{A LabKey API key for connecting to the LabKey server where the
+data product is stored. See the \href{https://www.labkey.org/Documentation/wiki-page.view?name=apikey}{LabKey documentation on API keys} for more
+information on generating a LabKey API key.}
 }
 \value{
-labkey_creds
+A data.frame with class "labkey_cred" and a column for each param.
 }
 \description{
-Get credentials for LabKey board
+Build a data frame that contains all of the credentials
+needed to connect to a LabKey server pin board.
 }
 \examples{
 \dontrun{

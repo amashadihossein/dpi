@@ -1,16 +1,24 @@
-#' @title Generate Properly Formatted AWS Credentials
-#' @description This function simply provides a consistent format for aws
-#' credentials. Additionally, it ensures the minimum requirement of either
-#' named profile or a set of AWS (key, secret) are provided. Note if named
-#' profile is provided key and secret will be ignored.
-#' @param profile_name AWS named profile for the bucket housing the data
-#' product. This is a name associated with credential within .aws/credentials
-#' (See AWS CLI configuring named profiles).
-#' @param key aws key associated with your access to the bucket housing the
-#' data product
-#' @param secret aws secret associated with your access to the bucket housing
-#' the data product
-#' @return A data.frame containing properly formatted AWS credentials
+#' @title Create formatted credentials for connecting to an s3 bucket board
+#'
+#' @description Build a data frame that contains all of the credentials
+#'   needed to connect to an s3 bucket pin board. Additionally, it ensures the
+#'   minimum requirement that either a named profile or a set of AWS key and
+#'   secret are provided. If a named profile is provided, the key and secret
+#'   will be ignored.
+#'
+#' @param profile_name The name of an AWS credentials profile for the s3 bucket
+#'   where the data product is stored. This is a name associated with a set of
+#'   credentials within the .aws/credentials files in your home directory. See
+#'   the [AWS CLI credentials file documentation](
+#'   https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+#'   for more information.
+#' @param key The AWS Access Key ID associated with your access to the s3 bucket
+#'   where the data product is stored.
+#' @param secret The AWS Secret Access Key associated with your access to the s3
+#'   bucket where the data product is stored.
+#'
+#' @return A data.frame with class "aws_creds" and a column for each param.
+#'
 #' @examples
 #' \dontrun{
 #' aws_creds <- creds_set_aws(
@@ -27,7 +35,6 @@ creds_set_aws <- function(profile_name = character(0), key = character(0),
       "secret and key need to be provided"
     )))
   }
-
 
   if (length(profile_name) > 0) {
     aws_profiles <- try(aws.signature::read_credentials())
@@ -67,7 +74,6 @@ creds_set_aws <- function(profile_name = character(0), key = character(0),
       " AWS profile name is needed."
     )))
   }
-
 
   aws_creds <- data.frame(
     profile_name = "",

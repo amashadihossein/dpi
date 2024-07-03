@@ -2,7 +2,7 @@
 % Please edit documentation in R/creds_set_aws.R
 \name{creds_set_aws}
 \alias{creds_set_aws}
-\title{Generate Properly Formatted AWS Credentials}
+\title{Create formatted credentials for connecting to an s3 bucket board}
 \usage{
 creds_set_aws(
   profile_name = character(0),
@@ -11,24 +11,27 @@ creds_set_aws(
 )
 }
 \arguments{
-\item{profile_name}{AWS named profile for the bucket housing the data
-product. This is a name associated with credential within .aws/credentials
-(See AWS CLI configuring named profiles).}
+\item{profile_name}{The name of an AWS credentials profile for the s3 bucket
+where the data product is stored. This is a name associated with a set of
+credentials within the .aws/credentials files in your home directory. See
+the \href{https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html}{AWS CLI credentials file documentation}
+for more information.}
 
-\item{key}{aws key associated with your access to the bucket housing the
-data product}
+\item{key}{The AWS Access Key ID associated with your access to the s3 bucket
+where the data product is stored.}
 
-\item{secret}{aws secret associated with your access to the bucket housing
-the data product}
+\item{secret}{The AWS Secret Access Key associated with your access to the s3
+bucket where the data product is stored.}
 }
 \value{
-A data.frame containing properly formatted AWS credentials
+A data.frame with class "aws_creds" and a column for each param.
 }
 \description{
-This function simply provides a consistent format for aws
-credentials. Additionally, it ensures the minimum requirement of either
-named profile or a set of AWS (key, secret) are provided. Note if named
-profile is provided key and secret will be ignored.
+Build a data frame that contains all of the credentials
+needed to connect to an s3 bucket pin board. Additionally, it ensures the
+minimum requirement that either a named profile or a set of AWS key and
+secret are provided. If a named profile is provided, the key and secret
+will be ignored.
 }
 \examples{
 \dontrun{

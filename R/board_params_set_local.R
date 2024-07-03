@@ -1,7 +1,7 @@
 #' @title Create formatted parameters that specify a local storage board
 #'
 #' @description Build a data frame that contains all of the parameters
-#'   needed to connect to a local storage board.
+#'   needed to specify a local storage pin board.
 #'
 #' @param folder The path to the local storage folder where the data product
 #'   will be stored. NOTE: this folder should be treated as a permanent location
