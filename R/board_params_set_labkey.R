@@ -1,10 +1,15 @@
-#' @title Generate Properly Formatted Board Parameters
-#' @description This function simply provides a consistent format for the board
-#' parameters
-#' @param board_alias name of the board
-#' @param url url of the LabKey server
-#' @param folder path of the study folder where the data product will be stored
-#' @return A data.frame board_params
+#' @title Create formatted parameters that specify a LabKey board
+#' 
+#' @description Build a data frame that contains all of the parameters
+#'   needed to connect to a LabKey board.
+#' 
+#' @param board_alias A short name for the board.
+#' @param url The URL of the LabKey server.
+#' @param folder The path of the study folder on the LabKey server where the
+#'   data product will be stored.
+#' 
+#' @return A data.frame with class "labkey_board" and a column for each param.
+#' 
 #' @examples
 #' \dontrun{
 #' board_params_set_labkey(

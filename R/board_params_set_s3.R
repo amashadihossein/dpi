@@ -1,10 +1,18 @@
-#' @title Generate Properly Formatted Board Parameters
-#' @description This function simply provides a consistent format for the board
-#' parameters
-#' @param bucket_name name of the s3 bucket
-#' @param region AWS region for the s3 bucket e.g. "us-east-1" or "us-west-1"
-#' @param board_alias `r lifecycle::badge("deprecated")` this argument is deprecated with newer pins
-#' @return A data.frame with properly formatted board_params
+#' @title Create formatted parameters that specify an s3 bucket board
+#'
+#' @description Build a data frame that contains all of the parameters
+#'   needed to connect to an s3 bucket board.
+#'
+#' @param bucket_name The name of the s3 bucket where the data product will be
+#'   stored.
+#' @param region The AWS region where the s3 bucket was created, e.g.
+#'   "us-east-1" or "us-west-1".
+#' @param board_alias A short name for the board.
+#'   `r lifecycle::badge("deprecated")` this argument is deprecated with
+#'   pins ≥ 1.0.
+#'
+#' @return A data.frame with class "s3_board" and a column for each param.
+#'
 #' @examples
 #' \dontrun{
 #' board_params_set_s3(

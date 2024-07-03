@@ -1,13 +1,18 @@
-#' @title Generate properly formatted board parameters for local board
-#' @description This function simply provides a consistent format for the board
-#' parameters
-#' @param folder path to data product storage folder. NOTE: as a general
-#' guidance this folder should be treated as a permanent location with immutable
-#' content. For example, a data product project folder *is not* an appropriate
-#' directory.
-#' @param board_alias `r lifecycle::badge("deprecated")` this argument is deprecated with newer pins
+#' @title Create formatted parameters that specify a local storage board
 #'
-#' @return A data.frame with properly formatted board_params
+#' @description Build a data frame that contains all of the parameters
+#'   needed to connect to a local storage board.
+#'
+#' @param folder The path to the local storage folder where the data product
+#'   will be stored. NOTE: this folder should be treated as a permanent location
+#'   with immutable content. For example, a data product git repo project folder
+#'   *is not* an appropriate directory.
+#' @param board_alias A short name for the board.
+#'   `r lifecycle::badge("deprecated")` this argument is deprecated with
+#'   pins ≥ 1.0.
+#'
+#' @return A data.frame with class "local_board" and a column for each param.
+#'
 #' @examples
 #' \dontrun{
 #' board_params_set_local(folder = "xxxx")
