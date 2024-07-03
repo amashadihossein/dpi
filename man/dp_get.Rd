@@ -2,24 +2,31 @@
 % Please edit documentation in R/dp_get.R
 \name{dp_get}
 \alias{dp_get}
-\title{Get the Data Object}
+\title{Get the data product from the remote pin board}
 \usage{
 dp_get(board_object, data_name, version = NULL)
 }
 \arguments{
-\item{board_object}{board object from \code{dp_connect}}
+\item{board_object}{A \code{pins_board} object from \code{dp_connect}.}
 
-\item{data_name}{name of the data product on the board, i.e. dp-cars-us001. To
-get a list of available data products, use \code{dp_list}}
+\item{data_name}{The name of the data product to get from the remote pin
+board, i.e. "dp-cars-us001". To get a list of data products available on
+the remote pin board, use \code{dp_list}.}
 
-\item{version}{data version to retrieve. If not specified, will retrieve the latest
-version. Use \code{dp_list} to see available versions.}
+\item{version}{The hash specifying the data product version to get from the
+remote pin board. If \code{NULL}, \code{dp_get} will get the latest version
+available. To get a list of versions available for each data product on the
+remote pin board, use \code{dp_list}.}
 }
 \value{
-data product object
+A data product object, which is a list with class \code{dp} and items
+\code{input}, \code{output}, and \code{README}.
 }
 \description{
-Load into working environment the data product object
+Get a data product object from the provided remote pin board,
+including input links and output data structure. By default get the latest
+version, or get a particular version by specifying the version hash (find
+available versions using \code{dp_list}).
 }
 \examples{
 \dontrun{
