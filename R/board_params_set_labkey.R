@@ -20,11 +20,17 @@
 #' }
 #' @export
 board_params_set_labkey <- function(board_alias, url, folder = "") {
+  
+  if (url == ""){
+    stop(cli::format_error("Non-empty url must be provided."))
+  }
 
   board_params <- data.frame(
     board_type = "labkey_board",
-    board_alias = board_alias, folder = folder,
-    url = url, stringsAsFactors = FALSE
+    board_alias = board_alias,
+    folder = folder,
+    url = url,
+    stringsAsFactors = FALSE
   )
 
   class(board_params) <- c("labkey_board", class(board_params))
