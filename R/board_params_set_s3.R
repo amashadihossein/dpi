@@ -27,11 +27,19 @@ board_params_set_s3 <- function(bucket_name, region, board_alias = deprecated())
                               details = downgrade_message())
   }
 
+  if (bucket_name == ""){
+    stop(cli::format_error("Non-empty bucket_name must be provided."))
+  }
+
+  if (region == ""){
+    stop(cli::format_error("Non-empty region must be provided."))
+  }
+
   if (!isTRUE(region %in% aws_availability_zones)) {
     av_zones <- paste0(aws_availability_zones, collapse = ", ")
     warning(cli::format_warning(glue::glue(
-      "region {region} is not in recorded ",
-      "AWS availibility zones. Check the ",
+      "region '{region}' is not in recorded ",
+      "AWS availability zones. Check the ",
       "region! Recorded regions are:\n
       {av_zones}"
     )))

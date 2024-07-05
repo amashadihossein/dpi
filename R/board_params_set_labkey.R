@@ -20,7 +20,6 @@
 #' }
 #' @export
 board_params_set_labkey <- function(board_alias, url, folder = "") {
-  
   if (url == ""){
     stop(cli::format_error("Non-empty url must be provided."))
   }
