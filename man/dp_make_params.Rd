@@ -28,6 +28,7 @@ prior to interacting with the content of the board.
 \examples{
 \dontrun{
 github_repo_url <- "https://github.com/<USERNAME>/<REPOSITORY NAME>"
-dp_params <- dp_make_params(github_repo_url = github_repo_url, repo_token = Sys.getenv("GITHUB_PAT"))
+dp_params <- dp_make_params(github_repo_url = github_repo_url, 
+                            repo_token = Sys.getenv("GITHUB_PAT"))
 }
 }
