@@ -1,8 +1,16 @@
-#' @title List Data Products on a Board
-#' @description  List all data products on a named board you are connected with.
-#' It requires connection via `dp_connect` first.
-#' @param board_object board object from `dp_connect`
-#' @return a tibble containing metadata of all versions of data products on board
+#' @title List data products on a remote pin board
+#' 
+#' @description List all available data products and their details from a remote
+#'   pin board. You must connect to the remote pin board using `dp_connect`
+#'   first. Details include data product name, version hashes, branch names,
+#'   sha1 hashes for the stored data objects, deployment time, and Git commit
+#'   details like author, commit message, and commit hash. The details returned
+#'   are read from the `dpboard-log` pin on the remote pin board.
+#' 
+#' @param board_object A `pins_board` object from `dp_connect`.
+#' @return A tibble with one row per version per data product from the remote
+#'   pin board. Each row contains metadata for the given version of the given
+#'   data product.
 #'
 #' @examples
 #' \dontrun{
@@ -38,7 +46,7 @@ dp_list <- function(board_object) {
   if (!"data.frame" %in% class(dpboard_log)) {
     stop(cli::format_error(glue::glue(
       "Could not retrieve dpboard_log!",
-      "Check spelling, your connection and ",
+      "Check spelling, your connection, and ",
       "your credentials!"
     )))
   }

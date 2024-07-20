@@ -2,24 +2,26 @@
 % Please edit documentation in R/board_params_set_local.R
 \name{board_params_set_local}
 \alias{board_params_set_local}
-\title{Generate properly formatted board parameters for local board}
+\title{Create formatted parameters that specify a local storage board}
 \usage{
 board_params_set_local(folder, board_alias = deprecated())
 }
 \arguments{
-\item{folder}{path to data product storage folder. NOTE: as a general
-guidance this folder should be treated as a permanent location with immutable
-content. For example, a data product project folder \emph{is not} an appropriate
-directory.}
+\item{folder}{The path to the local storage folder where the data product
+will be stored. NOTE: this folder should be treated as a permanent location
+with immutable content. For example, a data product git repo project folder
+\emph{is not} an appropriate directory.}
 
-\item{board_alias}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} this argument is deprecated with newer pins}
+\item{board_alias}{A short name for the board.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} this argument is deprecated with
+pins ≥ 1.0.}
 }
 \value{
-A data.frame with properly formatted board_params
+A data.frame with class "local_board" and a column for each param.
 }
 \description{
-This function simply provides a consistent format for the board
-parameters
+Build a data frame that contains all of the parameters
+needed to specify a local storage pin board.
 }
 \examples{
 \dontrun{
