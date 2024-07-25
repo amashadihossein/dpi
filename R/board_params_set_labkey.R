@@ -33,13 +33,22 @@ board_params_set_labkey <- function(board_alias = deprecated(), url, folder = ""
     stop(cli::format_error("Non-empty url must be provided."))
   }
 
-  board_params <- data.frame(
-    board_type = "labkey_board",
-    cache_alias = cache_alias,
-    folder = folder,
-    url = url,
-    stringsAsFactors = FALSE
-  )
+  if (is.null(cache_alias)) {
+    board_params <- data.frame(
+      board_type = "labkey_board",
+      folder = folder,
+      url = url,
+      stringsAsFactors = FALSE
+    )
+  } else {
+    board_params <- data.frame(
+      board_type = "labkey_board",
+      cache_alias = cache_alias,
+      folder = folder,
+      url = url,
+      stringsAsFactors = FALSE
+    )
+  }
 
   class(board_params) <- c("labkey_board", class(board_params))
   return(board_params)
