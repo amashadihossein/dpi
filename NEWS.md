@@ -1,3 +1,8 @@
+# dpi 0.3.0
+
+* Fully deprecated `board_alias` (#42) argument, which is deprecated in `pinsLabkey` v0.2.0
+* Addressed `dp_connect` issue on on windows related to removed of trailing slashes in s3 dirs (#38)
+
 # dpi 0.2.0
 
 * Added back support for LabKey boards (#32). `pinsLabkey` is now a dependency. 
