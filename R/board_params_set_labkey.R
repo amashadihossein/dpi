@@ -25,7 +25,7 @@
 board_params_set_labkey <- function(board_alias = deprecated(), url, folder = "",
                                     cache_alias = NULL) {
   if (lifecycle::is_present(board_alias)) {
-    lifecycle::deprecate_stop("0.2.1", "board_params_set_labkey(board_alias)",
+    lifecycle::deprecate_stop("0.3.0", "board_params_set_labkey(board_alias)",
                               details = downgrade_message())
   }
 
