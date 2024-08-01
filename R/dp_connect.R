@@ -1,10 +1,10 @@
 #' @title Connect to the data product pin board
-#' 
+#'
 #' @description Connect to the pin board storing the data product. This is
 #'   necessary prior to interacting with the content of the pin board. Behind
 #'   the scenes, the appropriate `pins::board_*` function is used to connect to
 #'   the pin board after any required credentials are set up.
-#' 
+#'
 #' @param creds The credentials required to connect to the pin board location.
 #'   A `creds_*` data.frame of the format returned by a `creds_set_*` function.
 #'   Use `creds_set_aws` or `creds_set_labkey` to set the appropriate
@@ -17,7 +17,7 @@
 #'   `board_params_set_local` to specify board parameters.
 #' @param ... other parameters to pass through to the specific `dp_connect.*`
 #'   method.
-#' 
+#'
 #' @return A `pins_board` object, which will be passed as an argument to other
 #'   functions that read and write the data product.
 #'
@@ -99,7 +99,7 @@ dp_connect.labkey_board <- function(board_params, creds, ...) {
   # Register the board
   tryCatch({
     board <- pinsLabkey::board_labkey(
-      board_alias = board_params$board_alias,
+      cache_alias = board_params$cache_alias,
       api_key = creds$api_key,
       base_url = board_params$url,
       folder = board_params$folder,
