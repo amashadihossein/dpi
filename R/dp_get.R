@@ -1,11 +1,22 @@
-#' @title  Get the Data Object
-#' @description Load into working environment the data product object
-#' @param board_object board object from `dp_connect`
-#' @param data_name name of the data product on the board, i.e. dp-cars-us001. To
-#' get a list of available data products, use `dp_list`
-#' @param version data version to retrieve. If not specified, will retrieve the latest
-#' version. Use `dp_list` to see available versions.
-#' @return data product object
+#' @title Get the data product from the remote pin board
+#' 
+#' @description Get a data product object from the provided remote pin board,
+#'   including input links and output data structure. By default get the latest
+#'   version, or get a particular version by specifying the version hash (find
+#'   available versions using `dp_list`).
+#' 
+#' @param board_object A `pins_board` object from `dp_connect`.
+#' @param data_name The name of the data product to get from the remote pin
+#'   board, i.e. "dp-cars-us001". To get a list of data products available on
+#'   the remote pin board, use `dp_list`.
+#' @param version The hash specifying the data product version to get from the
+#'   remote pin board. If `NULL`, `dp_get` will get the latest version
+#'   available. To get a list of versions available for each data product on the
+#'   remote pin board, use `dp_list`.
+#' 
+#' @return A data product object, which is a list with class `dp` and items
+#'   `input`, `output`, and `README`.
+#' 
 #' @examples
 #' \dontrun{
 #' aws_creds <- creds_set_aws(

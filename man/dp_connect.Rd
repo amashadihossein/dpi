@@ -2,26 +2,35 @@
 % Please edit documentation in R/dp_connect.R
 \name{dp_connect}
 \alias{dp_connect}
-\title{Connect to the Data Product Board}
+\title{Connect to the data product pin board}
 \usage{
 dp_connect(board_params, creds, ...)
 }
 \arguments{
-\item{board_params}{use \code{board_params_set_s3}, \code{board_params_set_labkey}, or
-\code{board_params_set_local} to specify board parameters. It contains the information
-for the board on which the data product is pinned.}
+\item{board_params}{The parameters specifying a pin board to connect to. This
+pin board is where the data product is stored. A \verb{*_board} data.frame of
+the format returned by a \verb{board_params_set_*} function. Use
+\code{board_params_set_s3}, \code{board_params_set_labkey}, or
+\code{board_params_set_local} to specify board parameters.}
 
-\item{creds}{use \code{creds_set_aws} or \code{creds_set_labkey} to set this. When using
-a local board, creds is ignored and does not need to be specified.}
+\item{creds}{The credentials required to connect to the pin board location.
+A \verb{creds_*} data.frame of the format returned by a \verb{creds_set_*} function.
+Use \code{creds_set_aws} or \code{creds_set_labkey} to set the appropriate
+credentials. Can be NULL for a local board, since creds are not required
+for local storage.}
 
-\item{...}{other parameters}
+\item{...}{other parameters to pass through to the specific \verb{dp_connect.*}
+method.}
 }
 \value{
-data product object
+A \code{pins_board} object, which will be passed as an argument to other
+functions that read and write the data product.
 }
 \description{
-Connect to the board housing the data product. This is needed
-prior to interacting with the content of the board.
+Connect to the pin board storing the data product. This is
+necessary prior to interacting with the content of the pin board. Behind
+the scenes, the appropriate \verb{pins::board_*} function is used to connect to
+the pin board after any required credentials are set up.
 }
 \examples{
 \dontrun{

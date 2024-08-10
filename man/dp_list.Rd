@@ -2,19 +2,25 @@
 % Please edit documentation in R/dp_list.R
 \name{dp_list}
 \alias{dp_list}
-\title{List Data Products on a Board}
+\title{List data products on a remote pin board}
 \usage{
 dp_list(board_object)
 }
 \arguments{
-\item{board_object}{board object from \code{dp_connect}}
+\item{board_object}{A \code{pins_board} object from \code{dp_connect}.}
 }
 \value{
-a tibble containing metadata of all versions of data products on board
+A tibble with one row per version per data product from the remote
+pin board. Each row contains metadata for the given version of the given
+data product.
 }
 \description{
-List all data products on a named board you are connected with.
-It requires connection via \code{dp_connect} first.
+List all available data products and their details from a remote
+pin board. You must connect to the remote pin board using \code{dp_connect}
+first. Details include data product name, version hashes, branch names,
+sha1 hashes for the stored data objects, deployment time, and Git commit
+details like author, commit message, and commit hash. The details returned
+are read from the \code{dpboard-log} pin on the remote pin board.
 }
 \examples{
 \dontrun{

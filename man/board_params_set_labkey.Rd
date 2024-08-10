@@ -2,28 +2,37 @@
 % Please edit documentation in R/board_params_set_labkey.R
 \name{board_params_set_labkey}
 \alias{board_params_set_labkey}
-\title{Generate Properly Formatted Board Parameters}
+\title{Create formatted parameters that specify a LabKey board}
 \usage{
-board_params_set_labkey(board_alias, url, folder = "")
+board_params_set_labkey(
+  board_alias = deprecated(),
+  url,
+  folder = "",
+  cache_alias = NULL
+)
 }
 \arguments{
-\item{board_alias}{name of the board}
+\item{board_alias}{A short name for the board.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} this argument is deprecated with
+pins ≥ 1.0.}
 
-\item{url}{url of the LabKey server}
+\item{url}{The URL of the LabKey server.}
 
-\item{folder}{path of the study folder where the data product will be stored}
+\item{folder}{The path of the study folder on the LabKey server where the
+data product will be stored.}
+
+\item{cache_alias}{A short name for the cache folder (optional).}
 }
 \value{
-A data.frame board_params
+A data.frame with class "labkey_board" and a column for each param.
 }
 \description{
-This function simply provides a consistent format for the board
-parameters
+Build a data frame that contains all of the parameters
+needed to specify a LabKey pin board.
 }
 \examples{
 \dontrun{
 board_params_set_labkey(
-  board_alias = "labkey-board",
   url = "https://learn.labkey.com/",
   folder = "folder_name"
 )

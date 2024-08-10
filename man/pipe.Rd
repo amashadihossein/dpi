@@ -8,5 +8,6 @@ lhs \%>\% rhs
 }
 \description{
 See \code{magrittr::\link[magrittr:pipe]{\%>\%}} for details.
+Set up using \code{usethis::use_pipe()}
 }
 \keyword{internal}
