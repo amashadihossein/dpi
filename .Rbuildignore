@@ -1,3 +1,5 @@
+^renv$
+^renv\.lock$
 ^dpi\.Rproj$
 ^\.Rproj\.user$
 ^README\.Rmd$
