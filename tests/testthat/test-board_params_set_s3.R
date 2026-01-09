@@ -3,6 +3,12 @@ test_that("s3 board params are built properly", {
     board_params_set_s3(bucket_name = "bucket_name", region = "us-east-1")
   )
 })
+
+test_that("s3 board params are built properly with prefix", {
+  expect_snapshot(
+    board_params_set_s3(bucket_name = "bucket_name", prefix = "testPrefix/", region = "us-east-1")
+  )
+})
   
 test_that("board_alias raises a deprecation error", {
   expect_error(
@@ -33,3 +39,19 @@ test_that("Empty region raises error", {
   )
 })
 
+test_that("Prefix without trailing slash raises warning", {
+  expect_error(
+    board_params_set_s3(bucket_name = "bucket_name", prefix = "data-products", region = "us-east-1"),
+    regexp = "trailing slash"
+  )
+  
+  # No warning when prefix has trailing slash
+  expect_no_error(
+    board_params_set_s3(bucket_name = "bucket_name", prefix = "data-products/", region = "us-east-1")
+  )
+  
+  # No warning when prefix is NULL
+  expect_no_error(
+    board_params_set_s3(bucket_name = "bucket_name", prefix = NULL, region = "us-east-1")
+  )
+})
