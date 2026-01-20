@@ -43,9 +43,9 @@ dp_connect <- function(board_params, creds, ...) {
 #' @export
 dp_connect.s3_board <- function(board_params, creds, ...) {
   args <- list(...)
-  board_subdir <- paste0(board_params$prefix, "daap/")
+  board_subdir <- paste0(ifelse(is.na(board_params$prefix), "", board_params$prefix), "daap/")
   if (length(args$board_subdir) > 0) {
-    board_subdir <- paste0(board_params$prefix, args$board_subdir)
+    board_subdir <- paste0(ifelse(is.na(board_params$prefix), "", board_params$prefix), args$board_subdir)
   }
 
   aws_creds <- creds
