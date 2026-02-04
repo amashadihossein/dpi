@@ -6,6 +6,8 @@
 \alias{dpi-package}
 \title{dpi: Data Product Programming Interface}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 This package provides an interface to data product.
 }
 \seealso{
