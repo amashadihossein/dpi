@@ -1,0 +1,130 @@
+# dpi
+
+``` r
+library(dpi)
+```
+
+## Background
+
+This package aims to provide a minimalist and uniform interface for
+retrieving data products and the associated metadata no matter where the
+data product is housed. Currently, s3, local, and LabKey are three types
+of remote repositories for housing data products.
+
+This packages leverages the `pins` package for accessing data. As such,
+it leverage the concept of `boards` for organizing data into **data
+spaces**. As an example, a team working on multiple clinical studies,
+may consider defining a data space or `board` for each study, each of
+which defined by a governance policy. In this example, a `board` is not
+dissimilar to the idea of a directory or folder. A board can be
+instantiated on different data platforms (e.g. AWS s3) supported by
+`pins` or its extensions.
+
+As different data platforms (e.g. s3 vs. LabKey) have their own specific
+url and ways of authentication, different parameters need to be set up
+for how connection to the remote data repository is to be established.
+Once the connection is established, however, all other interactions
+(e.g. list, get, version, etc.) are done using the same set of
+functions. With that in mind, the steps outlined below are divided into
+
+1.  Setting up the connection
+2.  Interacting with the data product
+
+## Set up connection
+
+Setting up connection to data products involves setting
+
+1.  Board parameters: parameters relating to the remote location of the
+    data product
+2.  Credential parameters: parameters checked by the remote location of
+    the data when trying to access
+
+**NOTE:** prior to proceeding further verify that you have working
+credentials for the repository you need to access.
+
+### Board parameters
+
+- For s3, you need to know the bucket name and the region.
+- For LabKey, you need to know the url of platform and specific folder.
+- For local boards, you only need to provide the path of the local
+  folder
+
+### Format board parameters
+
+For S3, you need to provide the s3 bucket name and region
+
+``` r
+board_params <- board_params_set_s3(
+  bucket_name = "bucket_name",
+  region = "us-east-1"
+)
+```
+
+For local, you need to provide the absolute folder path
+
+``` r
+board_params <- board_params_set_local(
+  folder = "/project_folder/subfolder"
+)
+```
+
+### Format your credentials
+
+This can be done with `cred_set_aws` or `cred_set_labkey` functions. The
+cred_set function signatures informs you of the type of parameters
+needed.
+
+**NOTE:** For security reasons, avoid putting your credentials inside
+your script. It is highly recommended to establish a habit of using
+environment variables in conjunction with secret management packages
+like `keyring`. Below, exemplifies this pattern, where the env variables
+are set using `Sys.setenv("AWS_KEY" = "xxxx")` in console, or using
+`keyring`,
+`Sys.setenv("AWS_KEY" = keyring::key_get(service = "AWS_KEY")`.
+Similarly, “AWS_SECRET” can be set as an environment variable.
+
+The signature for creds for AWS s3 is takes two parameters.
+
+``` r
+aws_creds <- creds_set_aws(
+  key = Sys.getenv("AWS_KEY"),
+  secret = Sys.getenv("AWS_SECRET")
+)
+```
+
+## Connect and interact with data product
+
+With the connection parameters established, interaction with the data
+product use the same set of function and format no matter where the data
+is housed.
+
+### Connect to the board
+
+Then we can connect to the board.
+
+``` r
+board_object <- dp_connect(board_params = board_params, creds = aws_creds)
+```
+
+### Work with the board
+
+List what data products available on this board we just connected to.
+Note we need to pass the board object in order to list available data
+products.
+
+``` r
+dp_list(board_object = board_object)
+```
+
+### Retrieve data
+
+Load data into the working environment, e.g. as object `dp`. Specifying
+version is optional.
+
+``` r
+dp <- dp_get(
+  board_object = board_object,
+  data_name = "dp-studyid_branchid",
+  version = "c5a51c3"
+)
+```

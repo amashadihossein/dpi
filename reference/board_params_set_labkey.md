@@ -1,0 +1,50 @@
+# Create formatted parameters that specify a LabKey board
+
+Build a data frame that contains all of the parameters needed to specify
+a LabKey pin board.
+
+## Usage
+
+``` r
+board_params_set_labkey(
+  board_alias = deprecated(),
+  url,
+  folder = "",
+  cache_alias = NULL
+)
+```
+
+## Arguments
+
+- board_alias:
+
+  A short name for the board. **\[deprecated\]** this argument is
+  deprecated with pins ≥ 1.0.
+
+- url:
+
+  The URL of the LabKey server.
+
+- folder:
+
+  The path of the study folder on the LabKey server where the data
+  product will be stored.
+
+- cache_alias:
+
+  A short name for the cache folder (optional).
+
+## Value
+
+A data.frame with class "labkey_board" and a column for each param.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+board_params_set_labkey(
+  url = "https://learn.labkey.com/",
+  folder = "folder_name"
+)
+} # }
+```
