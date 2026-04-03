@@ -9,7 +9,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/amashadihossein/dpi/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/amashadihossein/dpi/blob/v0.4.0/DESCRIPTION)
 
 Mashadi-Hossein A, Jiang Y (2026). *dpi: Data Product Programming
 Interface*. R package version 0.4.0.
