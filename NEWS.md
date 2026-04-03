@@ -1,3 +1,7 @@
+# dpi 0.4.0
+
+* Add "prefix" option to `board_params_set_s3()` so that a subfolder can be used as a storage location for s3 daaps
+
 # dpi 0.3.0
 
 * Fully deprecated `board_alias` (#42) argument, which is deprecated in `pinsLabkey` v0.2.0
